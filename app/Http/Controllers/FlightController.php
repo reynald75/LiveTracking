@@ -8,16 +8,6 @@ use Illuminate\Http\Request;
 class FlightController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getAll()
-    {
-        return Flight::all();
-    }
-
-    /**
      * Return the flights with specified organization_id.
      *
      * @param  int  $org_id
