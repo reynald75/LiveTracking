@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
-            $table->foreign('pilot_id')
-                ->references('id')
-                ->on('users');
+            $table->foreignId('user_id');
             $table->dateTime('start_time');
             $table->dateTime('end_time')
                 ->nullable();

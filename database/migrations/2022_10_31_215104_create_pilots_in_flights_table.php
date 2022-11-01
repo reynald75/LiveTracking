@@ -15,12 +15,8 @@ return new class extends Migration
     {
         Schema::create('pilots_in_flights', function (Blueprint $table) {
             $table->id();
-            $table->foreign('pilot_id')
-                ->references('id')
-                ->on('users');
-            $table->foreign('flight_id')
-                ->references('id')
-                ->on('flights');
+            $table->foreignId('pilot_id');
+            $table->foreignId('flight_id');
             $table->boolean('is_flying');
             $table->boolean('sos');
             $table->timestamps();

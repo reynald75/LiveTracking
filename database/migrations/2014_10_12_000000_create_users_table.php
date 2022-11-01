@@ -20,9 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('line_color');
-            $table->foreign('organization_id')
-                ->references('id')
-                ->on('organizations');
+            $table->foreignId('organization_id');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('gps_points', function (Blueprint $table) {
             $table->id();
-            $table->foreign('flight_id')
-                ->references('id')
-                ->on('flights');
+            $table->foreignId('flight_id');
             $table->float('lat');
             $table->float('lon');
             $table->float('alt');
