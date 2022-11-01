@@ -12,6 +12,17 @@ class FlightController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function getAll()
+    {
+        return Flight::all();
+    }
+
+    /**
+     * Return the flights with specified organization_id.
+     *
+     * @param  int  $org_id
+     * @return \Illuminate\Http\Response
+     */
     public function getAllByOrgId($org_id)
     {
         return Flight::where('organization_id', $org_id);
@@ -38,9 +49,9 @@ class FlightController extends Controller
     /**
      * Return the resource with specified id.
      *
-        * @param  int  $id
-        * @return Response
-        */
+     * @param  int  $id
+     * @return Response
+     */
     public function getById($id)
     {
         return Flight::find($id);
@@ -56,14 +67,14 @@ class FlightController extends Controller
     public function update(Request $request, Flight $flight)
     {
         $user = auth()->user();
-        if($flight->pilot_id == $user->id){
+        if ($flight->pilot_id == $user->id) {
             $request->validate([
-               'pilot_id' => 'required|integer',
-               'start_time' => 'required|date', 
-               'end_time' => 'nullable|date',
-               'dist_FAI' => 'required',
-               'dist_SD' => 'required',
-               'dist_actual' => 'required',
+                'pilot_id' => 'required|integer',
+                'start_time' => 'required|date',
+                'end_time' => 'nullable|date',
+                'dist_FAI' => 'required',
+                'dist_SD' => 'required',
+                'dist_actual' => 'required',
             ]);
 
             $flight->pilot_id = $request->pilot_id;
