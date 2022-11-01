@@ -13,14 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gps_points', function (Blueprint $table) {
+        Schema::create('messenger', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('flight_id');
-            $table->foreignId('messenger_id');
-            $table->float('lat');
-            $table->float('lon');
-            $table->float('alt');
-            $table->time('time');
+            $table->string('msg_id');
+            $table->string('msg_name');
+            $table->string('msg_type');
+            $table->string('msg_model');
+            $table->string('msg_batt_state');
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gps_points');
+        Schema::dropIfExists('messenger');
     }
 };

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GpsPoint extends Model
+class Messenger extends Model
 {
     use HasFactory;
 
@@ -15,12 +15,10 @@ class GpsPoint extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'flight_id',
-        'messenger_id',
-        'lat',
-        'lon',
-        'alt',
-        'msg',
-        'time',
+        'msg_id',
+        'msg_name',
+        'msg_type',
+        'msg_model',
+        'msg_batt_state'
     ];
 }
