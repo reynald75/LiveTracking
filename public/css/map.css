@@ -1,0 +1,81 @@
+#map{
+    position: absolute; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 7%;
+    z-index: -50 !important;
+    /*height: 94vh;
+    width: 100vw;*/
+}
+#forme_btn_dropdown_pilot{
+    position: absolute;
+    top: 7%;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 50px;
+}
+#img_btn_pilot{
+    height: 85%;
+    width: 85%;
+    object-fit: fill;
+}
+.Pilot_Bubble{
+    margin-left: 110px;
+    width: 120px;
+}
+.form_Pilot_bubble{
+    position: absolute;
+    top: 7%;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 50px;
+}
+
+.form_Pilot_bubble p{
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    margin-bottom: 0 !important;
+}
+.Info_Pilot{
+    margin-top: 122px;
+    background: white;
+    width: 130px;
+    border: 1px solid black;
+    visibility: hidden;
+}
+.Info_Pilot p{
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+}
+.polygon_Pilot{
+    width: 20px;
+    height: 20px;
+    background: white;
+    transform: rotate(-135deg);
+    border-radius: 0 0 6px 0;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-top: -11px;
+    margin-left: 30px;
+}
+.Info_Pilot_Icon{
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 0;
+}
+.Last_Icon{
+    margin-left: 45px;
+}
+
+.Info_Pilot_Icon img{
+    height: 100%;
+    width: 100%;
+}
