@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('line_color');
+            $table->string('line_color')->default('#000000');
             $table->foreignId('organization_id');
             $table->rememberToken();
             $table->timestamps();
