@@ -45,4 +45,5 @@
     <!--endforeach-->
 
     <script src="/js/map_function.js"></script>
+    <script>init('{{$org_id}}');</script>
 @endsection

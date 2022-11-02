@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\MapController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,4 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('map');
-});
+Route::get('/', [MapController::class , 'index']);
