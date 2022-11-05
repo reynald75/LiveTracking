@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Middleware\VerifyOrganization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FlightController;
-use App\Http\Controllers\GpsPointController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -37,5 +37,5 @@ Route::prefix('/points')->group(function () {
 });
 
 Route::prefix('/pilots')->group(function () {
-    Route::get('/', 'PilotInFlightController@getAll');
+    Route::get('/', 'PilotInFlightController@getAll')->middleware(VerifyOrganization::class);
 });
