@@ -20,7 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('/flights')->group(function () {
-    Route::get('/', 'FlightController@getAll');
     Route::get('/{id}', 'FlightController@getById');
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', 'FlightController@create');
@@ -35,4 +34,8 @@ Route::prefix('/points')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/');
     });
+});
+
+Route::prefix('/pilots')->group(function () {
+    Route::get('/', 'PilotInFlightController@getAll');
 });

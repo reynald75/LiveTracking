@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Flight extends Model
+class PilotInFlight extends Model
 {
     use HasFactory;
 
@@ -16,10 +16,16 @@ class Flight extends Model
      */
     protected $fillable = [
         'user_id',
-        'start_time',
-        'end_time',
-        'dist_FAI',
-        'dist_SD',
-        'dist_actual',
+        'flight_id',
+        'is_flying',
+        'sos'
     ];
+
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'pilots_in_flight';
 }

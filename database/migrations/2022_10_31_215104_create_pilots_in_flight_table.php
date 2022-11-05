@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pilots_in_flights', function (Blueprint $table) {
+        Schema::create('pilots_in_flight', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pilot_id');
+            $table->foreignId('user_id');
             $table->foreignId('flight_id');
             $table->boolean('is_flying');
             $table->boolean('sos');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pilots_in_flights');
+        Schema::dropIfExists('pilots_in_flight');
     }
 };

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flight;
+use App\Models\PilotInFlight;
 use Illuminate\Http\Request;
 
 class FlightController extends Controller
@@ -26,14 +27,21 @@ class FlightController extends Controller
     public function create()
     {
         $user = auth()->user();
-        Flight::create([
-            'pilot_id' => $user->id,
+        $flight = Flight::create([
+            'user_id' => $user->id,
             'start_time' => time(),
             'end_time' => null,
             'dist_FAI' => 0,
             'dist_SD' => 0,
             'dist_actual' => 0
         ]);
+        PilotInFlight::create([
+            'user_id' => $user->id,
+            'flight_id' => $flight->id,
+            'is_flying' => false,
+            'sos' => false
+        ]);
+        return $flight;
     }
 
     /**
