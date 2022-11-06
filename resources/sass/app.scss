@@ -6,3 +6,15 @@
 
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+
+//Custom general rules
+html body #app {
+    height: 100vh;
+    width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
+}
+
+main {
+    height: calc(100vh - 39px);
+}

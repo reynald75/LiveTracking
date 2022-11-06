@@ -11,7 +11,7 @@ function initMap() {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
-    let opentopoLayer = L.tileLayer('https://opentopomap.org/#map={z}/{x}/{y}', {
+    let opentopoLayer = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
         maxZoom: 17,
         attribution: '&copy; <a href="https://opentopomap.org/credits">OpenTopoMap</a>'
     });

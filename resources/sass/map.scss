@@ -1,0 +1,34 @@
+.Pilot_Bubble {
+    display: none;
+}
+
+.dropdown_button {
+    display: block;
+    position: absolute;
+    height: 150px;
+    width: 150px;
+}
+
+.dropdown_button button,
+.dropdown_button img {
+    border-radius: 75px !important;
+    height: 100%;
+    width: 100%;
+}
+
+#dropdown_Pilot {
+    top: 150px;
+    left: 10px;
+}
+
+#dropdown_Actions {
+    bottom: 50px;
+    right: 50px;
+}
+
+
+#map {
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+}
