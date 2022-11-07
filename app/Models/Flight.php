@@ -22,4 +22,12 @@ class Flight extends Model
         'dist_SD',
         'dist_actual',
     ];
+
+    /**
+     * Get the user associated with the flight.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

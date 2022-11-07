@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flight;
+use App\Models\User;
+use App\Models\Organization;
 use App\Models\PilotInFlight;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,9 @@ class FlightController extends Controller
      */
     public function getAllByOrgId($org_id)
     {
-        return Flight::where('organization_id', $org_id);
+        $org = Organization::where('ref_uuid', $org_id)->get();
+        $org_users = User::whereBelongsTo($org)->get();
+        return Flight::whereBelongsTo($org_users)->get();
     }
 
     /**

@@ -26,5 +26,21 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'organization_id' => 1
         ]);
+
+        DB::table('flights')->insert([
+            'user_id' => 1,
+            'start_time' => now(),
+            'end_time' => null,
+            'dist_FAI' => 0,
+            'dist_SD' => 0,
+            'dist_actual' => 0
+        ]);
+
+        DB::table('pilots_in_flight')->insert([
+            'user_id' => 1,
+            'flight_id' => 1,
+            'is_flying' => true,
+            'sos' => false
+        ]);
     }
 }

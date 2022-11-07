@@ -43,4 +43,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the user associated with the pilot.
+     */
+    public function organization()
+    {
+        return $this->belongsTo(Organization::class);
+    }
 }

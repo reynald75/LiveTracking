@@ -1,9 +1,10 @@
 var map
 
 function init(org_id) {
-    this.org_id = org_id;
     initMap();
-    $('#forme_btn_dropdown_pilot').on("click", updatePilotsInFlight);
+    $('#forme_btn_dropdown_pilot').on("click", function() {
+        updatePilotsInFlight(org_id)
+    });
 }
 
 function initMap() {
@@ -46,9 +47,9 @@ function showPosition(position) {
     ], 13);
 }
 
-function updatePilotsInFlight() {
+function updatePilotsInFlight(org_id) {
     $.ajax({
-        url: "/api/pilots",
+        url: "/api/pilots/display?org_id=" + org_id,
         type: 'GET',
         async: true,
         dataType: "json",

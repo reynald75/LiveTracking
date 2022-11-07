@@ -17,8 +17,7 @@ class MapController extends Controller
             }
         } else {
             if ($user = auth()->user()){
-                $org = Organization::find($user->org_id);
-                $org_id = $org->ref_uuid;
+                $org_id = $user->organization->ref_uuid;
             }
         }
         return view('map')->with('org_id', $org_id);

@@ -28,4 +28,20 @@ class PilotInFlight extends Model
      * @var string
      */
     protected $table = 'pilots_in_flight';
+
+    /**
+     * Get the user associated with the pilot.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the flight associated with the pilot.
+     */
+    public function flight()
+    {
+        return $this->belongsTo(Flight::class);
+    }
 }

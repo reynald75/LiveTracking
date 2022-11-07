@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organization;
 use App\Models\PilotInFlight;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PilotInFlightController extends Controller
@@ -16,6 +18,19 @@ class PilotInFlightController extends Controller
     public function getAll()
     {
         return PilotInFlight::all();
+    }
+
+    /**
+     * Return the pilots in flight with specified organization_id.
+     *
+     * @param  int  $org_id
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllByOrgId($org_id)
+    {
+        $org = Organization::where('ref_uuid', $org_id)->get();
+        $org_users = User::whereBelongsTo($org)->get();
+        return PilotInFlight::whereBelongsTo($org_users)->get();
     }
 
 
@@ -49,12 +64,23 @@ class PilotInFlightController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PilotInFlight  $pilotInFlight
      * @return \Illuminate\Http\Response
      */
-    public function show(PilotInFlight $pilotInFlight)
+    public function showAllByOrg(Request $request)
     {
-        //
+        $pilots = $this->getAllByOrgId($request->org_id);
+        $viewData = [];
+
+        foreach ($pilots as $pilot) {
+            $pilotData = [
+                'pilot_info' => $pilot,
+                'user_info' => $pilot->user,
+                'flight_info' => $pilot->flight
+            ];
+            array_push($viewData, $pilotData);
+        }
+
+        return view('subviews.pilot_bubble')->with('viewData', $viewData);
     }
 
     /**

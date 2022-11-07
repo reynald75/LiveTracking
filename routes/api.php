@@ -38,4 +38,5 @@ Route::prefix('/points')->group(function () {
 
 Route::prefix('/pilots')->group(function () {
     Route::get('/', 'PilotInFlightController@getAll')->middleware(VerifyOrganization::class);
+    Route::get('/display', 'PilotInFlightController@showAllByOrg')->middleware(VerifyOrganization::class);
 });
