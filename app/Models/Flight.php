@@ -30,4 +30,20 @@ class Flight extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the points associated with the flight.
+     */
+    public function points()
+    {
+        return $this->hasMany(GpsPoint::class);
+    }
+
+    /**
+     * Get the last point associated with the flight.
+     */
+    public function lastPoint()
+    {
+        return $this->points()->orderByDesc('time')->first();
+    }
 }

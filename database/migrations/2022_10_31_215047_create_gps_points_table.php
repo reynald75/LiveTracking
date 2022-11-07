@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('flight_id');
             $table->foreignId('messenger_id');
-            $table->float('lat');
-            $table->float('lon');
-            $table->float('alt');
-            $table->time('time');
+            $table->float('lat', 8, 5);
+            $table->float('lon', 8, 5);
+            $table->integer('alt');
+            $table->dateTime('time');
         });
     }
 

@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'Test User',
+            'initials' => 'TU',
             'email' => 'invalid@example.com',
             'password' => Hash::make('password'),
             'organization_id' => 1
@@ -42,5 +43,15 @@ class DatabaseSeeder extends Seeder
             'is_flying' => true,
             'sos' => false
         ]);
+
+        DB::table('messenger')->insert([
+            'msg_id' => 0,
+            'msg_name' => '',
+            'msg_type' => '',
+            'msg_model' => '',
+            'msg_batt_state' => '',
+        ]); 
+
+        $this->call(GpsPointsSeeder::class);
     }
 }

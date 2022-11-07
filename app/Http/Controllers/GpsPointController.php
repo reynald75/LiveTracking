@@ -19,6 +19,7 @@ class GpsPointController extends Controller
     {
         $request->validate([
             'flight_id' => 'required|integer',
+            'messenger_id' => 'required|integer',
             'lat' => 'required',
             'lon' => 'required',
             'alt' => 'required',
@@ -26,6 +27,7 @@ class GpsPointController extends Controller
         ]);
         GpsPoint::create([
             'flight_id' => $request->flight_id,
+            'messenger_id' => $request->messenger_id,
             'lat' => $request->lat,
             'lon' => $request->lon,
             'alt' => $request->alt,

@@ -23,4 +23,6 @@ class GpsPoint extends Model
         'msg',
         'time',
     ];
+
+    public $timestamps = false;
 }

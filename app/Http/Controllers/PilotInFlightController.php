@@ -75,7 +75,8 @@ class PilotInFlightController extends Controller
             $pilotData = [
                 'pilot_info' => $pilot,
                 'user_info' => $pilot->user,
-                'flight_info' => $pilot->flight
+                'flight_info' => $pilot->flight,
+                'last_point_info' => $pilot->flight->lastPoint()
             ];
             array_push($viewData, $pilotData);
         }
