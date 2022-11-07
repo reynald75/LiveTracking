@@ -14,15 +14,7 @@
         <button class="btn btn-secondary" id="forme_btn_dropdown_pilot">
             <img id="img_btn_pilot" src="{{ Vite::Asset('resources/img/img_btn_pilot.webp') }}" />
         </button>
-    </div>
-    <div class="dropdown_button" id="dropdown_Actions">
-        <button class="btn btn-secondary" id="forme_btn_dropdown_actions">
-            <img id="img_btn_pilot" src="{{ Vite::Asset('resources/img/img_btn_pilot.webp') }}" />
-        </button>
-    </div>
-    <!--Création des différents pilotes-->
-    <!--foreach ($pilots as $pilot)-->
-    <div class="Pilot_Bubble">
+        <div class="Pilot_Bubble">
         <button class="form_Pilot_bubble">
             <!--Initiales-->
             <p>TZ</p>
@@ -52,6 +44,15 @@
             </button>
         </div>
     </div>
+    </div>
+    <div class="dropdown_button" id="dropdown_Actions">
+        <button class="btn btn-secondary" id="forme_btn_dropdown_actions">
+            <img id="img_btn_pilot" src="{{ Vite::Asset('resources/img/img_btn_pilot.webp') }}" />
+        </button>
+    </div>
+    <!--Création des différents pilotes-->
+    <!--foreach ($pilots as $pilot)-->
+    
     <!--endforeach-->
 
     <script src="{{ Vite::Asset('resources/js/map_functions.js') }}"></script>

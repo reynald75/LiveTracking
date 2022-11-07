@@ -1,13 +1,30 @@
 .Pilot_Bubble {
-    display: flex;
+    position: absolute;
     opacity: 0;
     transform: translateX(-10px);
+
+}
+
+.form_Pilot_bubble {
+    position: absolute;
+    width: 100px !important;
+    height: 100px !important;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 50px;
+}
+
+.form_Pilot_bubble p {
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    margin-bottom: 0 !important;
 }
 
 .Info_Pilot {
-    margin-top: 122px;
+    margin-top: 10px;
     background: white;
-    width: 130px;
+    width: 120px;
     border: 1px solid black;
 }
 
@@ -30,8 +47,8 @@
 }
 
 .Info_Pilot_Icon {
-    width: 40px;
-    height: 40px;
+    width: 40px !important;
+    height: 40px !important;
     background: transparent;
     border: 0;
 }
@@ -48,8 +65,8 @@
 .dropdown_button {
     display: block;
     position: absolute;
-    height: 150px;
-    width: 150px;
+    height: 120px;
+    width: 120px;
 }
 
 .dropdown_button button,
@@ -72,6 +89,6 @@
 #map {
     height: 100%;
     width: 100%;
-    z-index: -1;
+    z-index: 0;
     filter:saturate(2);
 }
