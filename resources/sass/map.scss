@@ -1,5 +1,48 @@
 .Pilot_Bubble {
-    display: none;
+    display: flex;
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.Info_Pilot {
+    margin-top: 122px;
+    background: white;
+    width: 130px;
+    border: 1px solid black;
+}
+
+.Info_Pilot p {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+}
+
+.polygon_Pilot {
+    width: 20px;
+    height: 20px;
+    background: white;
+    transform: rotate(-135deg);
+    border-radius: 0 0 6px 0;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-top: -11px;
+    margin-left: 30px;
+}
+
+.Info_Pilot_Icon {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 0;
+}
+
+.Last_Icon {
+    margin-left: 45px;
+}
+
+.Info_Pilot_Icon img {
+    height: 100%;
+    width: 100%;
 }
 
 .dropdown_button {
@@ -29,5 +72,6 @@
 #map {
     height: 100%;
     width: 100%;
-    z-index: 0;
+    z-index: -1;
+    filter:saturate(2);
 }
