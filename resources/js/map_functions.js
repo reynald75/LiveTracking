@@ -2,7 +2,7 @@ var map
 
 function init(org_id) {
     initMap();
-    $('#forme_btn_dropdown_pilot').on("click", function() {
+    $('#dropdown_pilots_btn').on("click", function() {
         updatePilotsInFlight(org_id)
     });
 }
@@ -52,12 +52,12 @@ function updatePilotsInFlight(org_id) {
         url: "/api/pilots/display?org_id=" + org_id,
         type: 'GET',
         async: true,
-        dataType: "json",
+        dataType: "html",
         error: function(data) {
             console.log(data);
         },
         success: function(data) {
-            console.log(data);
+            $('#dropdown_pilots_content').html(data);
         }
     });
 }

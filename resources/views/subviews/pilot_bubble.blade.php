@@ -1,5 +1,5 @@
 @php
-    $coordinates_decimal_precision = 5;
+    define('COORDS_DECIMAL_PRECISION', 5);
 @endphp
 @foreach ($viewData as $data)
     <div class="Pilot_Bubble">
@@ -9,10 +9,10 @@
             <div class="Info_Pilot">
                 <div class="polygon_Pilot"></div>
                 <p>Latitude:
-                    {{number_format($data['last_point_info']['lat'], $coordinates_decimal_precision)}}
+                    {{number_format($data['last_point_info']['lat'], COORDS_DECIMAL_PRECISION)}}
                 </p>
                 <p>Longitude:
-                    {{number_format($data['last_point_info']['lon'], $coordinates_decimal_precision)}}
+                    {{number_format($data['last_point_info']['lon'], COORDS_DECIMAL_PRECISION)}}
                 </p>
                 <p>Altitude:
                     {{$data['last_point_info']['alt'] . "m"}}

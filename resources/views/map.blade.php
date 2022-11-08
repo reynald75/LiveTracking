@@ -10,50 +10,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
     <div id="map"></div>
     <!--Bouton Pilotes-->
-    <div class="dropdown_button" id="dropdown_Pilot">
-        <button class="btn btn-secondary" id="forme_btn_dropdown_pilot">
+    <div class="dropdown_button" id="dropdown_pilots_container">
+        <button class="btn btn-secondary" id="dropdown_pilots_btn">
             <img id="img_btn_pilot" src="{{ Vite::Asset('resources/img/img_btn_pilot.webp') }}" />
         </button>
-        <div class="Pilot_Bubble">
-        <button class="form_Pilot_bubble">
-            <!--Initiales-->
-            <p>TZ</p>
-        </button>
-        <div class="Info_Pilot">
-            <div class="polygon_Pilot"></div>
-            <p>Latitude:
-                <!--Info Recup-->
-            </p>
-            <p>Longitude:
-                <!--Info Recup-->
-            </p>
-            <p>Altitude:
-                <!--Info Recup-->
-            </p>
-            <button class="Info_Pilot_Icon">
-                <img src="{{ Vite::Asset('resources/img/Focus.png') }}" alt="Focus">
-            </button>
-            <button class="Info_Pilot_Icon">
-                <img src="{{ Vite::Asset('resources/img/eye.png') }}" alt="Show">
-            </button>
-            <button class="Info_Pilot_Icon">
-                <img src="{{ Vite::Asset('resources/img/last.webp') }}" alt="last point">
-            </button>
-            <button class="Info_Pilot_Icon Last_Icon">
-                <img src="{{ Vite::Asset('resources/img/ping.png') }}" alt="all pings">
-            </button>
-        </div>
+        <span id="dropdown_pilots_content"></span>
     </div>
-    </div>
-    <div class="dropdown_button" id="dropdown_Actions">
-        <button class="btn btn-secondary" id="forme_btn_dropdown_actions">
+    <div class="dropdown_button" id="dropdown_actions_container">
+        <button class="btn btn-secondary" id="dropdown_actions_btn">
             <img id="img_btn_pilot" src="{{ Vite::Asset('resources/img/img_btn_pilot.webp') }}" />
         </button>
+        <span id="dropdown_action_content"></span>
     </div>
-    <!--Création des différents pilotes-->
-    <!--foreach ($pilots as $pilot)-->
-    
-    <!--endforeach-->
 
     <script src="{{ Vite::Asset('resources/js/map_functions.js') }}"></script>
     <script src="{{ Vite::Asset('resources/js/map_visuals.js') }}"></script>
