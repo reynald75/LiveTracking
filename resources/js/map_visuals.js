@@ -1,4 +1,4 @@
-var btn = document.getElementById('forme_btn_dropdown_pilot');
+let btn = $('#dropdown_pilots_container');
 var tl = gsap.timeline({defaults: { ease: "power2.inOut"}})
 var toggle =false;
 
