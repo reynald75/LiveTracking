@@ -29,6 +29,7 @@ Route::prefix('/flights')->group(function () {
 
 
 Route::prefix('/points')->group(function () {
+    Route::get('/', 'GpsPointController@getByAll');
     Route::get('/{id}', 'GpsPointController@getById');
     Route::get('/flight/{id}', 'GpsPointController@getAllFromFlight');
     Route::middleware('auth:sanctum')->group(function () {

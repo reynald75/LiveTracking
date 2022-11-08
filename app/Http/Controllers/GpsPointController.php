@@ -57,4 +57,15 @@ class GpsPointController extends Controller
     {
         return GpsPoint::find($id);
     }
+
+    /**
+     * Return the resource with specified id.
+     *
+        * @param  int  $id
+        * @return Response
+        */
+    public function getByAll()
+    {
+        return GpsPoint::all();
+    }
 }
