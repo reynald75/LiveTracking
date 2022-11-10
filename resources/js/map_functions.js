@@ -2,8 +2,14 @@ var map
 
 function init(org_id) {
     initMap();
-    $('#dropdown_pilots_btn').on("click", function() {
+    /*$('#dropdown_pilots_btn').on("click", function() {
         updatePilotsInFlight(org_id)
+    });*/
+    updatePilotsInFlight(org_id);
+    $('#dropdown_pilots_btn').on("click", togglePilotsDropdown);
+
+    map.on("moveend", function() {
+        updatePilotsInFlight(org_id);
     });
 }
 
@@ -29,6 +35,7 @@ function initMap() {
 
     let overlayMaps = {};
     L.control.layers(baseMaps, overlayMaps).addTo(this.map);
+    L.control.scale().addTo(map);
     getLocation();
 }
 
@@ -48,6 +55,7 @@ function showPosition(position) {
 }
 
 function updatePilotsInFlight(org_id) {
+    console.log(map.getCenter().toString());
     $.ajax({
         url: "/api/pilots/display?org_id=" + org_id,
         type: 'GET',
@@ -58,6 +66,8 @@ function updatePilotsInFlight(org_id) {
         },
         success: function(data) {
             $('#dropdown_pilots_content').html(data);
+            let bubbles = $('.dropdown_pilot_bubble_container');
+            setPilotBubbles(bubbles, 0);
         }
     });
 }

@@ -7,20 +7,20 @@
     <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
         integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>-->
     <div id="map"></div>
     <!--Bouton Pilotes-->
-    <div class="dropdown_button" id="dropdown_pilots_container">
+    <div class="dropdown_button_container" id="dropdown_pilots_container">
         <button class="btn btn-secondary" id="dropdown_pilots_btn">
             <img id="img_btn_pilot" src="{{ Vite::Asset('resources/img/img_btn_pilot.webp') }}" />
         </button>
-        <span id="dropdown_pilots_content"></span>
+        <div id="dropdown_pilots_content" class="dropdown_content content_open"></div>
     </div>
-    <div class="dropdown_button" id="dropdown_actions_container">
+    <div class="dropdown_button_container" id="dropdown_actions_container">
+        <div id="dropdown_action_content" class="dropdown_content"></div>
         <button class="btn btn-secondary" id="dropdown_actions_btn">
             <img id="img_btn_pilot" src="{{ Vite::Asset('resources/img/img_btn_pilot.webp') }}" />
         </button>
-        <span id="dropdown_action_content"></span>
     </div>
 
     <script src="{{ Vite::Asset('resources/js/map_functions.js') }}"></script>

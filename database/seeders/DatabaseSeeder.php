@@ -21,9 +21,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('users')->insert([
-            'name' => 'Test User',
-            'initials' => 'TU',
-            'email' => 'invalid@example.com',
+            'name' => 'Test User 1',
+            'initials' => 'TU1',
+            'email' => 'invalid1@example.com',
+            'password' => Hash::make('password'),
+            'organization_id' => 1
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Test User 2',
+            'initials' => 'TU2',
+            'email' => 'invalid2@example.com',
             'password' => Hash::make('password'),
             'organization_id' => 1
         ]);
@@ -39,6 +47,13 @@ class DatabaseSeeder extends Seeder
 
         DB::table('pilots_in_flight')->insert([
             'user_id' => 1,
+            'flight_id' => 1,
+            'is_flying' => true,
+            'sos' => false
+        ]);
+
+        DB::table('pilots_in_flight')->insert([
+            'user_id' => 2,
             'flight_id' => 1,
             'is_flying' => true,
             'sos' => false

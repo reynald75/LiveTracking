@@ -1,16 +1,39 @@
-let btn = $('#dropdown_pilots_container');
-var tl = gsap.timeline({defaults: { ease: "power2.inOut"}})
-var toggle =false;
+function togglePilotsDropdown() {
+    let contentContainer = $('#dropdown_pilots_content');
+    let open = contentContainer.hasClass('content_open');
+    let bubbles = $('.dropdown_pilot_bubble_container');
 
-tl.to('.Pilot_Bubble', {
-    opacity:1,
-    transform: 'translateX(0)',
-    stagger: .05
- }, "-=.5")
- tl.pause();
+    if (open) {
+        contentContainer.removeClass('content_open');
+        contentContainer.addClass('content_closed');
+        stowPilotBubbles(bubbles);
+    } else {
+        contentContainer.removeClass('content_closed');
+        contentContainer.addClass('content_open');
+        setPilotBubbles(bubbles);
+    }
+}
 
- btn.addEventListener('click', () => {
-    /*document.getElementById("forme_btn_dropdown_pilot").insertAdjacentHTML("afterend", new URL("../views/Pilot_Bubble.blade.php"));*/
-    toggle =!toggle;
-    if (toggle? tl.play() : tl.reverse());
- })
+function moveBubbles(bubbles, duration, yCalc) {
+    _.forEach(bubbles, function(bubble, index) {
+        gsap.to(bubble, {
+            y: yCalc(index),
+            ease: "power2",
+            duration: duration
+        })
+    });
+}
+
+function setPilotBubbles(bubbles, duration = 0.5) {
+    let yCalc = function(index) {
+        return (75 + 10) + (75 + 10) * index;
+    };
+    moveBubbles(bubbles, duration, yCalc);
+}
+
+function stowPilotBubbles(bubbles) {
+    let yCalc = function() {
+        return 0;
+    };
+    moveBubbles(bubbles, 0.5, yCalc);
+}
