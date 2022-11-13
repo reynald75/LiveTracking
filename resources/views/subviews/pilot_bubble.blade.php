@@ -7,23 +7,23 @@
             <p>{{ $data['user_info']['initials'] }}</p>
         </button>
         <span class="dropdown_pilot_bubble_info">
-            <!--<div class="polygon_Pilot"></div>-->
-            <!--<table>
+            <div class="polygon_Pilot"></div>
+            <table class="dropdown_pilot_bubble_info_content">
                 <tbody>
                     <tr>
                         <td>
-                            <p>Latitude:
+                            <p><b>Latitude:</b>
                                 {{ number_format($data['last_point_info']['lat'], COORDS_DECIMAL_PRECISION) }}
                             </p>
-                            <p>Longitude:
+                            <p><b>Longitude:</b>
                                 {{ number_format($data['last_point_info']['lon'], COORDS_DECIMAL_PRECISION) }}
                             </p>
-                            <p>Altitude:
+                            <p><b>Altitude:</b>
                                 {{ $data['last_point_info']['alt'] . 'm' }}
                             </p>
                         </td>
                         <td>
-                            <table>
+                            <table class="dropdown_pilot_bubble_info_buttons">
                                 <tbody>
                                     <tr>
                                         <td>
@@ -55,7 +55,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>-->
+            </table>
         </span>
     </div>
 @endforeach

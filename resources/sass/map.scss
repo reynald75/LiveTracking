@@ -73,6 +73,8 @@ $dropdown_button_offset_side: 10px;
 #dropdown_pilots_btn {
     position: absolute;
     z-index: 2;
+    background-color: white;
+    border: 1px solid black;
 }
 
 .dropdown_button_container button {
@@ -86,13 +88,20 @@ $dropdown_button_offset_side: 10px;
     width: $dropdown_button_size;
 }
 
+.dropdown_pilot_bubble_button {
+    margin-top: 10px;
+    background-color: white;
+    border: 1px solid black;
+}
+
 .dropdown_button_container img {
     height: 100%;
     width: 100%;
 }
 
-.dropdown_button_container button,
-.dropdown_button_container img {
+#dropdown_pilots_btn,
+#dropdown_pilots_btn img,
+.dropdown_pilot_bubble_button {
     border-radius: 75px !important;
 }
 
@@ -126,16 +135,41 @@ $dropdown_button_offset_side: 10px;
     background-color: white;
 }
 
-.dropdown_pilot_bubble_info table {
-    display: inline;
-}
-
 .dropdown_pilot_bubble_info>* {
     display: inline;
 }
 
 .dropdown_pilot_bubble_info p {
     display: block;
+    margin-bottom: 4px;
+}
+
+.dropdown_pilot_bubble_info_content {
+    display: inline-block;
+    position: absolute;
+    background-color: white;
+    padding: 4px;
+    border: 1px solid black;
+    margin-left: 20px;
+}
+
+.dropdown_pilot_bubble_info_content::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-right-color: black;
+    border-left: 0;
+    margin-top: -20px;
+    margin-left: -20px;
+}
+
+.dropdown_pilot_bubble_info_buttons button {
+    height: 35px;
+    width: 35px;
 }
 
 #map {

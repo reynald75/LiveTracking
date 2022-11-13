@@ -26,7 +26,7 @@ function moveBubbles(bubbles, duration, yCalc) {
 
 function setPilotBubbles(bubbles, duration = 0.5) {
     let yCalc = function(index) {
-        return (75 + 10) + (75 + 10) * index;
+        return (75 + 15) + (75 + 25) * index;
     };
     moveBubbles(bubbles, duration, yCalc);
 }
