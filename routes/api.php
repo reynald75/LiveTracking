@@ -19,25 +19,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('/flights')->group(function () {
-    Route::get('/{id}', 'FlightController@getById');
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::post('/', 'FlightController@create');
-        Route::delete('/{id}', 'FlightController@destroy');
+Route::middleware('organization')->group(function () {
+    Route::prefix('/flights')->group(function () {
+        Route::get('/{id}', 'FlightController@getById')->where('id', '[0-9]+');;
+        Route::get('/active', 'FlightController@getActiveFlightPathsByOrgId');
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::post('/', 'FlightController@create');
+            Route::delete('/{id}', 'FlightController@destroy')->where('id', '[0-9]+');;
+        });
     });
-});
 
 
-Route::prefix('/points')->group(function () {
-    Route::get('/', 'GpsPointController@getByAll');
-    Route::get('/{id}', 'GpsPointController@getById');
-    Route::get('/flight/{id}', 'GpsPointController@getAllFromFlight');
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::post('/');
+    Route::prefix('/points')->group(function () {
+        Route::get('/', 'GpsPointController@getByAll');
+        Route::get('/{id}', 'GpsPointController@getById')->where('id', '[0-9]+');;
+        Route::get('/flight/{id}', 'GpsPointController@getAllFromFlight')->where('id', '[0-9]+');;
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::post('/');
+        });
     });
-});
 
-Route::prefix('/pilots')->group(function () {
-    Route::get('/', 'PilotInFlightController@getAll')->middleware(VerifyOrganization::class);
-    Route::get('/display', 'PilotInFlightController@showAllByOrg')->middleware(VerifyOrganization::class);
+    Route::prefix('/pilots')->group(function () {
+        Route::get('/', 'PilotInFlightController@getAll');
+        Route::get('/display', 'PilotInFlightController@showAllByOrg');
+    });
 });

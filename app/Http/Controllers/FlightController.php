@@ -49,7 +49,7 @@ class FlightController extends Controller
     }
 
     /**
-     * Return the resource with specified id.
+     * Return the Flight with the specified id.
      *
      * @param  int  $id
      * @return Response
@@ -57,6 +57,58 @@ class FlightController extends Controller
     public function getById($id)
     {
         return Flight::find($id);
+    }
+
+    /**
+     * Return the Flight path with the specified id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getFlightPathById($id)
+    {
+        $flight = $this->getById($id);
+        $flight->points;
+        $flight->user;
+
+        return $flight;
+    }
+
+    /**
+     * Return the Flight path batch with the specified ids.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getFlightPathBatchByIds(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'integer',
+        ]);
+
+        $data = [];
+
+        foreach ($request->ids as $id) {
+            array_push($data, $this->getFlightPathById($id));
+        }
+
+        return $data;
+    }
+
+    /**
+     * Return the active flight paths with specified organization_id.
+     *
+     * @param  int  $org_id
+     * @return \Illuminate\Http\Response
+     */
+    public function getActiveFlightPathsByOrgId(Request $request)
+    {
+        $pilots = app('App\Http\Controllers\PilotInFlightController')->getAllByOrgId($request->org_id);
+        $flight_ids = $pilots->pluck('flight_id')->toArray();
+
+        $data_request = new Request();
+        $data_request->replace(['ids' => $flight_ids]);
+
+        return $this->getFlightPathBatchByIds($data_request);
     }
 
     /**
