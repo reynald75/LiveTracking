@@ -41,6 +41,6 @@ Route::middleware('organization')->group(function () {
 
     Route::prefix('/pilots')->group(function () {
         Route::get('/', 'PilotInFlightController@getAll');
-        Route::get('/display', 'PilotInFlightController@showAllByOrg');
+        Route::get('/display', 'PilotInFlightController@showAllByOrgId');
     });
 });

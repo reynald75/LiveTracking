@@ -66,7 +66,7 @@ class PilotInFlightController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showAllByOrg(Request $request)
+    public function showAllByOrgId(Request $request)
     {
         $pilots = $this->getAllByOrgId($request->org_id);
         $viewData = [];
