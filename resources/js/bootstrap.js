@@ -27,6 +27,12 @@ window.$ = jQuery;
 import gsap from 'gsap';
 window.gsap = gsap;
 
+/**
+ * Load Leaflet NPM package and Leaflet plugins
+ */
+import leaflet from 'leaflet';
+window.leaflet = leaflet;
+import "leaflet-layervisibility";
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

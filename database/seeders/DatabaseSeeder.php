@@ -25,7 +25,8 @@ class DatabaseSeeder extends Seeder
             'initials' => 'TU1',
             'email' => 'invalid1@example.com',
             'password' => Hash::make('password'),
-            'organization_id' => 1
+            'organization_id' => 1,
+            'line_color' => '#FF0000'
         ]);
 
         DB::table('users')->insert([
@@ -33,11 +34,21 @@ class DatabaseSeeder extends Seeder
             'initials' => 'TU2',
             'email' => 'invalid2@example.com',
             'password' => Hash::make('password'),
-            'organization_id' => 1
+            'organization_id' => 1,
+            'line_color' => '#0000FF'
         ]);
 
         DB::table('flights')->insert([
             'user_id' => 1,
+            'start_time' => now(),
+            'end_time' => null,
+            'dist_FAI' => 0,
+            'dist_SD' => 0,
+            'dist_actual' => 0
+        ]);
+
+        DB::table('flights')->insert([
+            'user_id' => 2,
             'start_time' => now(),
             'end_time' => null,
             'dist_FAI' => 0,
@@ -54,17 +65,16 @@ class DatabaseSeeder extends Seeder
 
         DB::table('pilots_in_flight')->insert([
             'user_id' => 2,
-            'flight_id' => 1,
+            'flight_id' => 2,
             'is_flying' => true,
             'sos' => false
         ]);
 
         DB::table('messenger')->insert([
-            'msg_id' => 0,
-            'msg_name' => '',
-            'msg_type' => '',
-            'msg_model' => '',
-            'msg_batt_state' => '',
+            'messenger_id' => 0,
+            'messenger_name' => '',
+            'messenger_model' => '',
+            'messenger_batt_state' => '',
         ]); 
 
         $this->call(GpsPointsSeeder::class);

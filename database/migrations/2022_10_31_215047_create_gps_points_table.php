@@ -20,6 +20,9 @@ return new class extends Migration
             $table->float('lat', 8, 5);
             $table->float('lon', 8, 5);
             $table->integer('alt');
+            $table->string('msg_type');
+            $table->string('msg_content')->nullable();
+            $table->boolean('msg_show')->default(true);
             $table->dateTime('time');
         });
     }

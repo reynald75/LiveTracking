@@ -21,6 +21,7 @@ class GpsPointsSeeder extends Seeder
             'lat' => 46.13004,
             'lon' => 6.17144,
             'alt' => 1268,
+            'msg_type' => 'TRACK',
             'time' => date("Y-m-d\TH:i:s",1656515873)
         ]);
         GpsPoint::create([
@@ -29,6 +30,7 @@ class GpsPointsSeeder extends Seeder
             'lat' => 46.13126,
             'lon' => 6.17002,
             'alt' => 1286,
+            'msg_type' => 'TRACK',
             'time' => date("Y-m-d\TH:i:s",1656516070)
         ]);
         GpsPoint::create([
@@ -37,6 +39,7 @@ class GpsPointsSeeder extends Seeder
             'lat' => 46.12568,
             'lon' => 6.16266,
             'alt' => 1400,
+            'msg_type' => 'TRACK',
             'time' => date("Y-m-d\TH:i:s",1656516364)
         ]);
         GpsPoint::create([
@@ -45,6 +48,7 @@ class GpsPointsSeeder extends Seeder
             'lat' => 46.12204,
             'lon' => 6.15882,
             'alt' => 1106,
+            'msg_type' => 'TRACK',
             'time' => date("Y-m-d\TH:i:s",1656516665)
         ]);
         GpsPoint::create([
@@ -53,6 +57,7 @@ class GpsPointsSeeder extends Seeder
             'lat' => 46.11579,
             'lon' => 6.15893,
             'alt' => 0,
+            'msg_type' => 'TRACK',
             'time' => date("Y-m-d\TH:i:s",1656516964)
         ]);
         GpsPoint::create([
@@ -61,6 +66,7 @@ class GpsPointsSeeder extends Seeder
             'lat' => 46.10622,
             'lon' => 6.15224,
             'alt' => -103,
+            'msg_type' => 'TRACK',
             'time' => date("Y-m-d\TH:i:s",1656517264)
         ]);
         GpsPoint::create([
@@ -69,6 +75,34 @@ class GpsPointsSeeder extends Seeder
             'lat' => 46.08231,
             'lon' => 6.17713,
             'alt' => 0,
+            'msg_type' => 'TRACK',
+            'time' => date("Y-m-d\TH:i:s",1656517556)
+        ]);
+        GpsPoint::create([
+            'flight_id' => 2,
+            'messenger_id' => 1,
+            'lat' => 46.11279,
+            'lon' => 6.15893,
+            'alt' => 0,
+            'msg_type' => 'TRACK',
+            'time' => date("Y-m-d\TH:i:s",1656516964)
+        ]);
+        GpsPoint::create([
+            'flight_id' => 2,
+            'messenger_id' => 1,
+            'lat' => 46.10322,
+            'lon' => 6.15224,
+            'alt' => -103,
+            'msg_type' => 'TRACK',
+            'time' => date("Y-m-d\TH:i:s",1656517264)
+        ]);
+        GpsPoint::create([
+            'flight_id' => 2,
+            'messenger_id' => 1,
+            'lat' => 46.07931,
+            'lon' => 6.17713,
+            'alt' => 0,
+            'msg_type' => 'TRACK',
             'time' => date("Y-m-d\TH:i:s",1656517556)
         ]);
     }

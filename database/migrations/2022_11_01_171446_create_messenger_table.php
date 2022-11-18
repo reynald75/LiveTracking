@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('messenger', function (Blueprint $table) {
             $table->id();
-            $table->string('msg_id');
-            $table->string('msg_name');
-            $table->string('msg_type');
-            $table->string('msg_model');
-            $table->string('msg_batt_state');
+            $table->string('messenger_id');
+            $table->string('messenger_name');
+            $table->string('messenger_model');
+            $table->string('messenger_batt_state');
         });
     }
 
