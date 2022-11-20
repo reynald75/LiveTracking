@@ -27,26 +27,33 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <button class="Info_Pilot_Icon">
+                                            <button class="dropdown_pilot_bubble_info_button" title="Focus on pilot"
+                                                onclick="focusOnFlight({{ $data['flight_info']['id'] }})">
                                                 <img src="{{ Vite::Asset('resources/img/Focus.png') }}" alt="Focus">
                                             </button>
                                         </td>
                                         <td>
-                                            <button class="Info_Pilot_Icon">
-                                                <img src="{{ Vite::Asset('resources/img/eye.png') }}" alt="Show">
+                                            <button class="dropdown_pilot_bubble_info_button" title="Show/Hide flight"
+                                                onclick="toggleFlightPath({{ $data['flight_info']['id'] }})">
+                                                <img src="{{ Vite::Asset('resources/img/eye.png') }}"
+                                                    alt="Show/Hide flight">
                                             </button>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button class="Info_Pilot_Icon">
+                                            <button class="dropdown_pilot_bubble_info_button" title="Fly to last point"
+                                                onclick="flyToLastPoint({{ json_encode([$data['last_point_info']['lat'], $data['last_point_info']['lon']]) }})">
                                                 <img src="{{ Vite::Asset('resources/img/last.webp') }}"
-                                                    alt="last point">
+                                                    alt="Last point">
                                             </button>
                                         </td>
                                         <td>
-                                            <button class="Info_Pilot_Icon Last_Icon">
-                                                <img src="{{ Vite::Asset('resources/img/ping.png') }}" alt="all pings">
+                                            <button class="dropdown_pilot_bubble_info_button Last_Icon"
+                                                title="Show/Hide all markers for flight"
+                                                onclick="toggleFlightPathMarkers({{ $data['flight_info']['id'] }})">
+                                                <img src="{{ Vite::Asset('resources/img/ping.png') }}"
+                                                    alt="All markers">
                                             </button>
                                         </td>
                                     </tr>

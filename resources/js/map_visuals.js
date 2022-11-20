@@ -37,3 +37,35 @@ function stowPilotBubbles(bubbles) {
     };
     moveBubbles(bubbles, 0.5, yCalc);
 }
+
+function toggleFlightPath(flightId) {
+    let flightLayer = getFlightLayer(flightId);
+
+    if (flightLayer.isHidden()) {
+        flightLayer.show();
+    } else {
+        flightLayer.hide();
+    }
+}
+
+function toggleFlightPathMarkers(flightId) {
+    let flightLayer = getFlightLayer(flightId);
+
+    if (flightLayer.isHidden()) {
+        flightLayer.show();
+    } else {
+        flightLayer.getLayers()
+            .filter(layer => layer.options.id == 'flight_marker-' + flightId)
+            .map(layer => (layer.isHidden()) ? layer.show() : layer.hide());
+    }
+}
+
+function focusOnFlight(flightId) {
+    let flightLayer = getFlightLayer(flightId);
+
+    map.flyToBounds(flightLayer.getBounds());
+}
+
+function flyToLastPoint(lastPoint) {
+    map.flyTo(lastPoint, 16);
+}

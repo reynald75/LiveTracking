@@ -2,16 +2,12 @@ var map
 
 function init(org_id) {
     initMap();
-    /*$('#dropdown_pilots_btn').on("click", function() {
-        updatePilotsInFlight(org_id)
-    });*/
     updatePilotsInFlight(org_id);
     updateFlightPaths(org_id);
     $('#dropdown_pilots_btn').on("click", togglePilotsDropdown);
 
     map.on("moveend", function() {
         updatePilotsInFlight(org_id);
-        updateFlightPaths(org_id);
     });
 }
 
@@ -115,6 +111,15 @@ function updateFlightPaths(org_id) {
 
             layerGroup.clearLayers();
             layerGroup.addLayer(layers);
+
+            layers.getLayers().map(layerGroups => {
+                layerGroups.getLayers().map(feature => {
+                    let lastMarkerRegEx = '(flight_marker-\\d)(?!_last)';
+                    if (feature.options.id.match(lastMarkerRegEx)) {
+                        feature.hide();
+                    }
+                })
+            })
         }
     });
 }
@@ -122,22 +127,34 @@ function updateFlightPaths(org_id) {
 function constructFlightPathLayers(data) {
     let layers = L.layerGroup();
     _.forEach(data, function(flight) {
-        let layer = L.layerGroup();
-        let latLngs = [];
-
-        _.forEach(flight.points, function(point) {
-            latLngs.push(new L.LatLng(point.lat, point.lon, point.alt));
+        let layer = L.featureGroup([], {
+            id: 'flight-' + flight.id
         });
 
-        layer.addLayer(L.polyline(latLngs, {
+        layer.addLayer(L.polyline(flight.points.map(p => [p.lat, p.lon, p.alt]), {
             color: flight.user.line_color,
             id: 'flight_polyline-' + flight.id
         }));
 
-        //_.forEach()
-        console.log(flight.points);
+        _.forEach(flight.points, function(point) {
+            let marker = L.marker([point.lat, point.lon], {
+                id: 'flight_marker-' + flight.id + (point == flight.points.at(-1) ? '_last' : '')
+            });
+
+            layer.addLayer(marker);
+        });
 
         layers.addLayer(layer);
     });
     return layers;
+}
+
+function getFlightLayer(flightId) {
+    let flightLayer;
+    map.eachLayer(function(layer) {
+        if (layer.options.id == 'flight-' + flightId) {
+            flightLayer = layer;
+        }
+    });
+    return flightLayer;
 }
