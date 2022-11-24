@@ -17,8 +17,15 @@ class Messenger extends Model
     protected $fillable = [
         'msg_id',
         'msg_name',
-        'msg_type',
         'msg_model',
         'msg_batt_state'
     ];
+    
+    /**
+     * Get the user associated with the pilot.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

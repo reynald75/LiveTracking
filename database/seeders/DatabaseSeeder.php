@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             'line_color' => '#FF0000'
         ]);
 
-        DB::table('users')->insert([
+        /*DB::table('users')->insert([
             'name' => 'Test User 2',
             'initials' => 'TU2',
             'email' => 'invalid2@example.com',
@@ -68,15 +68,17 @@ class DatabaseSeeder extends Seeder
             'flight_id' => 2,
             'is_flying' => true,
             'sos' => false
-        ]);
+        ]);*/
 
-        DB::table('messenger')->insert([
-            'messenger_id' => 0,
-            'messenger_name' => '',
-            'messenger_model' => '',
-            'messenger_batt_state' => '',
+        DB::table('messengers')->insert([
+            'user_id' => 1,
+            'feed_id' => '0-1234567',
+            'name' => '',
+            'model' => '',
+            'mfr' => 'SPOT',
+            'batt_state' => '',
         ]); 
 
-        $this->call(GpsPointsSeeder::class);
+        //$this->call(GpsPointsSeeder::class);
     }
 }

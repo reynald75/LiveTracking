@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Flight;
 use App\Models\User;
 use App\Models\Organization;
-use App\Models\PilotInFlight;
 use Illuminate\Http\Request;
 
 class FlightController extends Controller
@@ -21,31 +20,6 @@ class FlightController extends Controller
         $org = Organization::where('ref_uuid', $org_id)->get();
         $org_users = User::whereBelongsTo($org)->get();
         return Flight::whereBelongsTo($org_users)->get();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $user = auth()->user();
-        $flight = Flight::create([
-            'user_id' => $user->id,
-            'start_time' => time(),
-            'end_time' => null,
-            'dist_FAI' => 0,
-            'dist_SD' => 0,
-            'dist_actual' => 0
-        ]);
-        PilotInFlight::create([
-            'user_id' => $user->id,
-            'flight_id' => $flight->id,
-            'is_flying' => false,
-            'sos' => false
-        ]);
-        return $flight;
     }
 
     /**
@@ -140,6 +114,101 @@ class FlightController extends Controller
 
             $flight->save();
         }
+    }
+
+    /**
+     * Calculate and save flown distances
+     *
+     * @param  \App\Models\Flight  $flight
+     */
+    static function calculateDistances(Flight $flight)
+    {
+        $points = $flight->points()->orderBy('time')->get();
+
+        $flight->dist_SD = FlightController::calculateStraightLineDistance($points);
+        $flight->dist_actual = FlightController::calculateActualDistance($points);
+        $flight->dist_FAI = FlightController::calculateFAITriangleDistance($points);
+
+        $flight->save();
+    }
+
+    /**
+     * Calculate straight line flown distance
+     *
+     * @param array $points
+     * @return float distance
+     */
+    static function calculateStraightLineDistance($points)
+    {
+        $pointA = $points[0];
+        $pointB = $points[count($points) - 1];
+
+        return FlightController::haversineGreatCircleDistance($pointA['lat'], $pointA['lon'], $pointB['lat'], $pointB['lon']);
+    }
+
+    /**
+     * Calculate actual flown distance
+     *
+     * @param array $points
+     * @return float distance
+     */
+    static function calculateActualDistance($points)
+    {
+        $distance = 0;
+        $pointIndex = 0;
+
+        while ($pointIndex < count($points) - 1) {
+            $pointA = $points[$pointIndex];
+            $pointB = $points[$pointIndex + 1];
+
+            $distance += FlightController::calculateStraightLineDistance(array($pointA, $pointB));
+            $pointIndex += 1;
+        }
+
+        return $distance;
+    }
+
+    /**
+     * Calculate FAI triangle flown distance
+     *
+     * @param array $points
+     * @return float distance
+     */
+    static function calculateFAITriangleDistance($points)
+    {
+        return 0;
+    }
+
+    /**
+     * Source: https://stackoverflow.com/a/14751773
+     * Calculates the great-circle distance between two points, with
+     * the Haversine formula.
+     * @param float $latitudeFrom Latitude of start point in [deg decimal]
+     * @param float $longitudeFrom Longitude of start point in [deg decimal]
+     * @param float $latitudeTo Latitude of target point in [deg decimal]
+     * @param float $longitudeTo Longitude of target point in [deg decimal]
+     * @param float $earthRadius Mean earth radius in [m]
+     * @return float Distance between points in [m] (same as earthRadius)
+     */
+    static function haversineGreatCircleDistance(
+        $latitudeFrom,
+        $longitudeFrom,
+        $latitudeTo,
+        $longitudeTo,
+        $earthRadius = 6371000
+    ) {
+        // convert from degrees to radians
+        $latFrom = deg2rad($latitudeFrom);
+        $lonFrom = deg2rad($longitudeFrom);
+        $latTo = deg2rad($latitudeTo);
+        $lonTo = deg2rad($longitudeTo);
+
+        $latDelta = $latTo - $latFrom;
+        $lonDelta = $lonTo - $lonFrom;
+
+        $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+            cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+        return $angle * $earthRadius;
     }
 
     /**

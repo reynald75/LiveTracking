@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('messenger', function (Blueprint $table) {
+        Schema::create('messengers', function (Blueprint $table) {
             $table->id();
-            $table->string('messenger_id');
-            $table->string('messenger_name');
-            $table->string('messenger_model');
-            $table->string('messenger_batt_state');
+            $table->string('feed_id');
+            $table->foreignId('user_id');
+            $table->string('name');
+            $table->string('model');
+            $table->string('mfr');
+            $table->string('batt_state');
         });
     }
 
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messenger');
+        Schema::dropIfExists('messengers');
     }
 };

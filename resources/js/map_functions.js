@@ -136,6 +136,10 @@ function constructFlightPathLayers(data) {
             id: 'flight_polyline-' + flight.id
         }));
 
+        flight.points.sort(function(a, b) {
+            return a.time > b.time;
+        });
+
         _.forEach(flight.points, function(point) {
             let marker = L.marker([point.lat, point.lon], {
                 id: 'flight_marker-' + flight.id + (point == flight.points.at(-1) ? '_last' : '')

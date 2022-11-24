@@ -16,11 +16,12 @@ class GpsPoint extends Model
      */
     protected $fillable = [
         'flight_id',
-        'messenger_id',
         'lat',
         'lon',
         'alt',
-        'msg',
+        'msg_type',
+        'msg_content',
+        'msg_show',
         'time',
     ];
 
