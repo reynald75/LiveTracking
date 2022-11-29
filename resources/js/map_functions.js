@@ -114,8 +114,8 @@ function updateFlightPaths(org_id) {
 
             layers.getLayers().map(layerGroups => {
                 layerGroups.getLayers().map(feature => {
-                    let lastMarkerRegEx = '(flight_marker-\\d)(?!_last)';
-                    if (feature.options.id.match(lastMarkerRegEx)) {
+                    let lastMarkerRegEx = '(flight_info_marker-\\d)(?!_last)';
+                    if (feature.options.id != null && feature.options.id.match(lastMarkerRegEx)) {
                         feature.hide();
                     }
                 })
@@ -136,21 +136,74 @@ function constructFlightPathLayers(data) {
             id: 'flight_polyline-' + flight.id
         }));
 
-        flight.points.sort(function(a, b) {
-            return a.time > b.time;
-        });
-
-        _.forEach(flight.points, function(point) {
-            let marker = L.marker([point.lat, point.lon], {
-                id: 'flight_marker-' + flight.id + (point == flight.points.at(-1) ? '_last' : '')
-            });
-
-            layer.addLayer(marker);
-        });
+        layer = createMarkers(flight, layer);
 
         layers.addLayer(layer);
     });
     return layers;
+}
+
+function createMarkers(flight, layer) {
+    flight.points.sort(function(a, b) {
+        return a.time > b.time;
+    });
+
+    const markerTemplate = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon-svg" style="width:32px;height:48px">' +
+        '<path class="svg-icon-path" d="m1 16 15 30 15-30a8 8 0 0 0-30 0Z" stroke-width="2" stroke="COLOR" stroke-opacity="undefined" fill="COLOR" fill-opacity=".4"/>' +
+        '<circle class="svg-icon-circle" cx="16" cy="16" r="10" fill="#FFF" stroke="COLOR" stroke-width="2"/>' +
+        '<text text-anchor="middle" x="16" y="18.8" style="font-size:11.5px" fill="rgba(0, 0, 0,1)">TEXT</text>' +
+        '</svg>';
+
+    _.forEach(flight.points, function(point) {
+        let markerColor;
+        let markerText;
+
+        switch (_.indexOf(flight.points, point)) {
+            case 0:
+                markerColor = "#0000FF"
+                markerText = "ST";
+                break;
+            case flight.points.length - 1:
+                markerColor = "#000000";
+                markerText = "OK";
+                break;
+            default:
+                markerColor = flight.user.line_color;
+                markerText = _.indexOf(flight.points, point);
+                break;
+        }
+
+        let markerSvg = markerTemplate;
+        markerSvg = markerSvg.replaceAll('COLOR', markerColor);
+        markerSvg = markerSvg.replace('TEXT', markerText);
+        let markerIconUrl = 'data:image/svg+xml;base64,' + btoa(markerSvg);
+
+        let icon = L.icon({
+            iconUrl: markerIconUrl,
+            iconSize: [32, 48],
+            iconAnchor: [16, 48],
+            popupAnchor: [-3, -48],
+            shadowUrl: 'data:image/svg+xml;base64,' + btoa('<svg xmlns="http://www.w3.org/2000/svg"></svg>')
+        });
+
+        let info_marker = L.marker([point.lat, point.lon], {
+            id: 'flight_info_marker-' + flight.id + (point == flight.points.at(-1) ? '_last' : ''),
+            icon: icon,
+            zIndexOffset: (point == flight.points.at(0) || point == flight.points.at(-1) ? 1000 : _.indexOf(flight.points, point) * 10)
+        });
+
+        addMarkerPopup(info_marker, point);
+
+        let polyline_marker = L.circleMarker([point.lat, point.lon], {
+            color: flight.user.line_color,
+            radius: 2
+        });
+
+        layer.addLayer(info_marker);
+        layer.addLayer(polyline_marker);
+    });
+
+    return layer;
 }
 
 function getFlightLayer(flightId) {
@@ -161,4 +214,29 @@ function getFlightLayer(flightId) {
         }
     });
     return flightLayer;
+}
+
+function addMarkerPopup(marker, point) {
+    let table = document.createElement("table");
+    let row = document.createElement("tr");
+    let labels = document.createElement("td");
+    let values = document.createElement("td");
+
+    labels.innerHTML = "<b>Latitude:</b><br/>" +
+        "<b>Longitude:</b><br/>" +
+        "<b>Altitude:</b><br/>" +
+        "<b>Heure:</b><br/>";
+
+    values.innerHTML = point['lat'] + "°<br/>" +
+        point['lon'] + "°<br/>" +
+        point['alt'] + "m<br/>" +
+        point['time'] + "<br/>";
+
+    values.style.textAlign = "right";
+
+    row.appendChild(labels);
+    row.appendChild(values);
+    table.appendChild(row);
+
+    marker.bindPopup(table);
 }

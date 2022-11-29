@@ -19,7 +19,6 @@ $dropdown_button_offset_side: 10px;
 }
 
 #dropdown_pilots_btn,
-//#dropdown_actions_btn,
 .dropdown_pilot_bubble_button {
     height: $dropdown_button_size;
     width: $dropdown_button_size;
@@ -28,7 +27,18 @@ $dropdown_button_offset_side: 10px;
 .dropdown_pilot_bubble_button {
     margin-top: 10px;
     background-color: white;
-    border: 1px solid black;
+    border: 3px solid black;
+    padding-top: 10px;
+}
+
+.dropdown_pilot_bubble_button p {
+    margin: 0px;
+    line-height: 0.9rem;
+}
+
+.dropdown_pilot_bubble_button h1 {
+    margin: 0px 0px 5px 0px;
+    line-height: 1.5rem;
 }
 
 .dropdown_button_container img {
@@ -42,17 +52,16 @@ $dropdown_button_offset_side: 10px;
     border-radius: 75px !important;
 }
 
+#dropdown_pilots_btn,
+.dropdown_pilot_bubble_button {
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
+}
+
 #dropdown_pilots_container {
     top: 150px;
     left: $dropdown_button_offset_side;
     height: calc(100% - 150px);
 }
-
-/*#dropdown_actions_container {
-    bottom: 20px;
-    right: $dropdown_button_offset_side;
-    height: calc(100% - 20px);
-}*/
 
 .dropdown_content {
     height: calc(100% - $dropdown_button_size);
@@ -79,6 +88,11 @@ $dropdown_button_offset_side: 10px;
 .dropdown_pilot_bubble_info p {
     display: block;
     margin-bottom: 4px;
+    line-height: 1rem;
+}
+
+.dropdown_pilot_bubble_info hr {
+    margin: 2px 0px 2px 0px;
 }
 
 .dropdown_pilot_bubble_info_content {
@@ -88,6 +102,7 @@ $dropdown_button_offset_side: 10px;
     padding: 4px;
     border: 1px solid black;
     margin-left: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
 }
 
 .dropdown_pilot_bubble_info_content::after {
@@ -105,8 +120,17 @@ $dropdown_button_offset_side: 10px;
 }
 
 .dropdown_pilot_bubble_info_buttons button {
-    height: 35px;
-    width: 35px;
+    height: 40px;
+    width: 40px;
+    background-color: white;
+    border-radius: 40px;
+    border: 0px solid gray;
+    margin: 0px 0px 5px 5px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px;
+}
+
+#dropdown_pilot_bubble_info_content_values p {
+    text-align: right;
 }
 
 #map {

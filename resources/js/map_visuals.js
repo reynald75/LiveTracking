@@ -55,7 +55,7 @@ function toggleFlightPathMarkers(flightId) {
         flightLayer.show();
     } else {
         flightLayer.getLayers()
-            .filter(layer => layer.options.id == 'flight_marker-' + flightId)
+            .filter(layer => layer.options.id == 'flight_info_marker-' + flightId)
             .map(layer => (layer.isHidden()) ? layer.show() : layer.hide());
     }
 }

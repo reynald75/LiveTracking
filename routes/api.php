@@ -31,7 +31,6 @@ Route::middleware('organization')->group(function () {
 
 
     Route::prefix('/points')->group(function () {
-        Route::get('/', 'GpsPointController@getByAll');
         Route::get('/{id}', 'GpsPointController@getById')->where('id', '[0-9]+');;
         Route::get('/flight/{id}', 'GpsPointController@getAllFromFlight')->where('id', '[0-9]+');;
         Route::middleware('auth:sanctum')->group(function () {
@@ -44,3 +43,5 @@ Route::middleware('organization')->group(function () {
         Route::get('/display', 'PilotInFlightController@showAllByOrgId');
     });
 });
+
+Route::get('/messenger', 'MessengerController@callFeeds');
