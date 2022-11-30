@@ -26,7 +26,7 @@ function moveBubbles(bubbles, duration, yCalc) {
 
 function setPilotBubbles(bubbles, duration = 0.5) {
     let yCalc = function(index) {
-        return (75 + 15) + (75 + 25) * index;
+        return (85 + 15) * (index + 1);
     };
     moveBubbles(bubbles, duration, yCalc);
 }
@@ -57,6 +57,16 @@ function toggleFlightPathMarkers(flightId) {
         flightLayer.getLayers()
             .filter(layer => layer.options.id == 'flight_info_marker-' + flightId)
             .map(layer => (layer.isHidden()) ? layer.show() : layer.hide());
+    }
+}
+
+function toggleFlightInfo(sender) {
+    let parentNode = sender.currentTarget.parentNode;
+    let flightInfoSpan = parentNode.lastElementChild;
+    if (flightInfoSpan.style.display != "inline-block") {
+        flightInfoSpan.style.display = "inline-block";
+    } else {
+        flightInfoSpan.style.display = "none";
     }
 }
 

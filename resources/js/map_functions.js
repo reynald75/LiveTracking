@@ -7,7 +7,7 @@ function init(org_id) {
     $('#dropdown_pilots_btn').on("click", togglePilotsDropdown);
 
     map.on("moveend", function() {
-        updatePilotsInFlight(org_id);
+        //updatePilotsInFlight(org_id);
     });
 }
 
@@ -86,6 +86,7 @@ function updatePilotsInFlight(org_id) {
             $('#dropdown_pilots_content').html(data);
             let bubbles = $('.dropdown_pilot_bubble_container');
             setPilotBubbles(bubbles, 0);
+            $('.dropdown_pilot_bubble_button').on("click", toggleFlightInfo);
         }
     });
 }

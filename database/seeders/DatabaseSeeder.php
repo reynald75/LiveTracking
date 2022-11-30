@@ -23,52 +23,11 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Romain Binggeli',
             'initials' => 'RB',
-            'email' => 'invalid1@example.com',
+            'email' => 'invalid@example.com',
             'password' => Hash::make('password'),
             'organization_id' => 1,
             'line_color' => '#FF0000'
         ]);
-
-        /*DB::table('users')->insert([
-            'name' => 'Test User 2',
-            'initials' => 'TU2',
-            'email' => 'invalid2@example.com',
-            'password' => Hash::make('password'),
-            'organization_id' => 1,
-            'line_color' => '#0000FF'
-        ]);
-
-        DB::table('flights')->insert([
-            'user_id' => 1,
-            'start_time' => now(),
-            'end_time' => null,
-            'dist_FAI' => 0,
-            'dist_SD' => 0,
-            'dist_actual' => 0
-        ]);
-
-        DB::table('flights')->insert([
-            'user_id' => 2,
-            'start_time' => now(),
-            'end_time' => null,
-            'dist_FAI' => 0,
-            'dist_SD' => 0,
-            'dist_actual' => 0
-        ]);
-
-        DB::table('pilots_in_flight')->insert([
-            'user_id' => 1,
-            'flight_id' => 1,
-            'is_flying' => true,
-            'sos' => false
-        ]);
-
-        DB::table('pilots_in_flight')->insert([
-            'user_id' => 2,
-            'flight_id' => 2,
-            'is_flying' => true,
-            'sos' => false
-        ]);*/
 
         DB::table('messengers')->insert([
             'user_id' => 1,
@@ -79,6 +38,29 @@ class DatabaseSeeder extends Seeder
             'batt_state' => '',
         ]); 
 
-        //$this->call(GpsPointsSeeder::class);
+        for ($i=0; $i < 5; $i++) { 
+
+            DB::table('users')->insert([
+                'name' => 'Test ' . $i,
+                'initials' => 'T' . $i,
+                'email' => 'invalid' . $i . '@example.com',
+                'password' => Hash::make('password'),
+                'organization_id' => 1,
+                'line_color' => $this->rand_color()
+            ]);
+    
+            DB::table('messengers')->insert([
+                'user_id' => $i + 2,
+                'feed_id' => '0-' . $i,
+                'name' => '',
+                'model' => '',
+                'mfr' => 'SPOT',
+                'batt_state' => '',
+            ]); 
+        }
+    }
+
+    function rand_color() {
+        return sprintf('#%06X', mt_rand(0, 0xFFFFFF));
     }
 }

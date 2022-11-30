@@ -1,4 +1,4 @@
-$dropdown_button_size: 75px;
+$dropdown_button_size: 85px;
 $dropdown_button_offset_side: 10px;
 
 .dropdown_button_container {
@@ -25,10 +25,10 @@ $dropdown_button_offset_side: 10px;
 }
 
 .dropdown_pilot_bubble_button {
-    margin-top: 10px;
     background-color: white;
     border: 3px solid black;
     padding-top: 10px;
+    display: inline;
 }
 
 .dropdown_pilot_bubble_button p {
@@ -66,6 +66,7 @@ $dropdown_button_offset_side: 10px;
 .dropdown_content {
     height: calc(100% - $dropdown_button_size);
     pointer-events: none;
+    overflow: scroll;
 }
 
 .dropdown_pilot_bubble_container {
@@ -73,12 +74,14 @@ $dropdown_button_offset_side: 10px;
     top: 0;
     left: 0;
     z-index: 0;
-    max-height: $dropdown_button_size;
+    height: auto;
     width: 500px;
+    display: flex;
+    align-items: center;
 }
 
 .dropdown_pilot_bubble_info {
-    background-color: white;
+    display: none;
 }
 
 .dropdown_pilot_bubble_info>* {
@@ -97,26 +100,11 @@ $dropdown_button_offset_side: 10px;
 
 .dropdown_pilot_bubble_info_content {
     display: inline-block;
-    position: absolute;
     background-color: white;
     padding: 4px;
     border: 1px solid black;
     margin-left: 20px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
-}
-
-.dropdown_pilot_bubble_info_content::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    width: 0;
-    height: 0;
-    border: 20px solid transparent;
-    border-right-color: black;
-    border-left: 0;
-    margin-top: -20px;
-    margin-left: -20px;
 }
 
 .dropdown_pilot_bubble_info_buttons button {

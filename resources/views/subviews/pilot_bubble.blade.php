@@ -2,14 +2,13 @@
     define('COORDS_DECIMAL_PRECISION', 5);
 @endphp
 @foreach ($viewData as $data)
-    <div class="dropdown_pilot_bubble_container">
+    <span class="dropdown_pilot_bubble_container">
         <button class="dropdown_pilot_bubble_button" style="border-color: {{$data['user_info']['line_color']}}">
             <h1>{{ $data['user_info']['initials'] }}</h1>
             <p>{{ number_format($data['flight_info']['dist_actual'] / 1000, 1)}}km</p>
             <p>{{ $data['last_point_info']['alt']}}m</p>
         </button>
         <span class="dropdown_pilot_bubble_info">
-            <div class="polygon_Pilot"></div>
             <table class="dropdown_pilot_bubble_info_content">
                 <tbody>
                     <th>
@@ -21,15 +20,15 @@
                             <p><b>Dist. parcouru:</b></p>
                             <p><b>Dist. décollage:</b></p>
                             <p><b>Altitude:</b></p>
-                            <p><b>Vitesse moyenne:</b></p>
+                            <p><b>Vitesse moy.:</b></p>
                             <p><b>Dernier contact:</b></p>
                         </td>
                         <td id="dropdown_pilot_bubble_info_content_values">
-                            <p>{{ number_format($data['flight_info']['dist_actual'] / 1000, 1)}}km</p>
-                            <p>{{ number_format($data['flight_info']['dist_SD'] / 1000, 1)}}km</p>
-                            <p>{{ $data['last_point_info']['alt'] . 'm' }}</p>
-                            <p>N/A</p>
-                            <p>{{ date('H:i', strtotime($data['last_point_info']['time'])); }}</p>
+                            <p><b>{{ number_format($data['flight_info']['dist_actual'] / 1000, 1)}}km</b></p>
+                            <p><b>{{ number_format($data['flight_info']['dist_SD'] / 1000, 1)}}km</b></p>
+                            <p><b>{{ $data['last_point_info']['alt'] . 'm' }}</b></p>
+                            <p><b>N/A</b></p>
+                            <p><b>{{ date('H:i', strtotime($data['last_point_info']['time'])); }}</b></p>
                         </td>
                         <td>
                             <table class="dropdown_pilot_bubble_info_buttons">
@@ -73,5 +72,5 @@
                 </tbody>
             </table>
         </span>
-    </div>
+    </span>
 @endforeach
