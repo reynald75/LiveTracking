@@ -43,5 +43,3 @@ Route::middleware('organization')->group(function () {
         Route::get('/display', 'PilotInFlightController@showAllByOrgId');
     });
 });
-
-Route::get('/messenger', 'MessengerController@callFeeds');
