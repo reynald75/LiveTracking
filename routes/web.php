@@ -15,10 +15,29 @@ use App\Http\Controllers\MapController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes(['register' => false]);
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::prefix('admin')->group(function () {
+        Route::get('/site', 'OrganizationController@showAll')->name('site_administration')->middleware('siteAdmin');
+        Route::get('/organization', 'OrganizationController@show')->name('org_administration')->middleware('orgAdmin');
+    });
+
+    Route::get('/profile', 'UserController@show')->name('profile');
+
+    Route::get('/organization/create', 'OrganizationController@create')->middleware('siteAdmin');
+    Route::get('/pilots/create', 'UserController@create')->middleware('orgAdmin');
+
+    //API routes called from web forms needing web middleware group
+    Route::prefix('api')->group(function(){
+        Route::post('/organization', 'OrganizationController@store')->middleware('siteAdmin');
+        Route::prefix('pilot')->group(function(){
+            Route::post('/', 'AuthController@createUser')->middleware('orgAdmin');
+            Route::delete('/{id}', 'UserController@destroy')->name('pilot.destroy')/*->middleware('orgAdmin')*/;
+            Route::get('/edit/{id}', 'UserController@edit');
+        });
+    });
+
 });
 
-Auth::routes();
-
-Route::get('/', [MapController::class , 'index']);
+Route::get('/', 'MapController@index');

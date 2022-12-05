@@ -1,0 +1,79 @@
+.userColorSwatch {
+    border: 1px solid black;
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+}
+
+.Action {
+    height: 100%;
+    max-height: 30px;
+    max-width: 30px;
+    border: none;
+    display: inline-block;
+    background-color: transparent;
+}
+
+.Action a {
+    color: black;
+}
+
+.ActionContainer {
+    display: flex;
+    height: 100%;
+    width: auto;
+    align-items: center;
+    flex-direction: row;
+}
+
+
+#orgAdd,
+#userAdd {
+    max-height: 60px;
+    max-width: 280px;
+}
+
+#userAdd {
+    margin: 10px;
+}
+
+#orgAdd {
+    margin: 20px 0px 20px 50px;
+}
+
+#orgAdd a,
+#userAdd a {
+    color: white;
+}
+
+svg {
+    height: 100%;
+    width: 100%;
+    max-height: 30px;
+    max-width: 30px;
+    display: inline-block;
+}
+
+.accordion {
+    margin: 0px 50px 50px 50px;
+}
+
+.accordion-collapse {
+    overflow-x: scroll;
+}
+
+table td {
+    height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+
+    #orgAdd {
+        margin: 10px;
+
+    }
+
+    .accordion {
+        margin: 0px 10px 10px 10px;
+    }
+}

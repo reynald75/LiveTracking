@@ -16,11 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Organization::create([
-            'name' => 'AlpsFreeRide',
-            'ref_uuid' => 'd5e5622e-c856-46a0-a4cc-7484a827e549'
-        ]);
-
+        $this->call(OrganizationSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
     }
