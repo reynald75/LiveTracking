@@ -54,3 +54,9 @@ import "leaflet-layervisibility";
 //     forceTLS: (import.meta.env.VITE_PUSHER_SCHEME ?? 'https') === 'https',
 //     enabledTransports: ['ws', 'wss'],
 // });
+
+import map_functions from './map_functions';
+window.map_functions = map_functions;
+
+import map_visuals from './map_visuals';
+window.map_visuals = map_visuals;

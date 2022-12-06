@@ -1,10 +1,15 @@
-var map
+export default {
+    init,
+    getMap
+}
+
+var map = null;
 
 function init(org_id) {
     initMap();
     updatePilotsInFlight(org_id);
     updateFlightPaths(org_id);
-    $('#dropdown_pilots_btn').on("click", togglePilotsDropdown);
+    $('#dropdown_pilots_btn').on("click", map_visuals.togglePilotsDropdown);
 
     map.on("moveend", function() {
         //updatePilotsInFlight(org_id);
@@ -32,7 +37,7 @@ function initMap() {
         attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     });
 
-    this.map = L.map('map', {
+    map = L.map('map', {
         center: [47, 8],
         zoom: 9,
         layers: [opentopoLayer, openstreetmapLayer, satelliteLayer, thunderforestLayer]
@@ -52,7 +57,7 @@ function initMap() {
     let overlays = {
         "Flight paths": flightPaths
     }
-    L.control.layers(baseMaps, overlays).addTo(this.map);
+    L.control.layers(baseMaps, overlays).addTo(map);
 
     L.control.scale().addTo(map);
     getLocation();
@@ -62,7 +67,7 @@ function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-        this.x.innerHTML = "Geolocation is not supported by this browser.";
+        //this.x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
@@ -85,8 +90,8 @@ function updatePilotsInFlight(org_id) {
         success: function(data) {
             $('#dropdown_pilots_content').html(data);
             let bubbles = $('.dropdown_pilot_bubble_container');
-            setPilotBubbles(bubbles, 0);
-            $('.dropdown_pilot_bubble_button').on("click", toggleFlightInfo);
+            map_visuals.setPilotBubbles(bubbles, 0);
+            $('.dropdown_pilot_bubble_button').on("click", map_visuals.toggleFlightInfo);
         }
     });
 }
@@ -207,16 +212,6 @@ function createMarkers(flight, layer) {
     return layer;
 }
 
-function getFlightLayer(flightId) {
-    let flightLayer;
-    map.eachLayer(function(layer) {
-        if (layer.options.id == 'flight-' + flightId) {
-            flightLayer = layer;
-        }
-    });
-    return flightLayer;
-}
-
 function addMarkerPopup(marker, point) {
     let table = document.createElement("table");
     let row = document.createElement("tr");
@@ -240,4 +235,8 @@ function addMarkerPopup(marker, point) {
     table.appendChild(row);
 
     marker.bindPopup(table);
+}
+
+function getMap() {
+    return map;
 }

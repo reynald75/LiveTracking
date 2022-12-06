@@ -11,8 +11,6 @@
         </button>
         <div id="dropdown_pilots_content" class="dropdown_content content_open"></div>
     </div>
-
-    <script src="{{ Vite::Asset('resources/js/map_functions.js') }}"></script>
-    <script src="{{ Vite::Asset('resources/js/map_visuals.js') }}"></script>
-    <script type="module">init('{{$org_id}}');</script>
+    
+    <script type="module">map_functions.init('{{$org_id}}');</script>
 @endsection

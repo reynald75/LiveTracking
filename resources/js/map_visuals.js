@@ -1,3 +1,15 @@
+import map_functions from "./map_functions";
+
+export default {
+    togglePilotsDropdown,
+    setPilotBubbles,
+    toggleFlightInfo,
+    focusOnFlight,
+    flyToLastPoint,
+    toggleFlightPathMarkers,
+    toggleFlightPath
+}
+
 function togglePilotsDropdown() {
     let contentContainer = $('#dropdown_pilots_content');
     let open = contentContainer.hasClass('content_open');
@@ -72,10 +84,23 @@ function toggleFlightInfo(sender) {
 
 function focusOnFlight(flightId) {
     let flightLayer = getFlightLayer(flightId);
+    let map = map_functions.getMap();
 
     map.flyToBounds(flightLayer.getBounds());
 }
 
 function flyToLastPoint(lastPoint) {
+    let map = map_functions.getMap();
     map.flyTo(lastPoint, 16);
+}
+
+function getFlightLayer(flightId) {
+    let flightLayer;
+    let map = map_functions.getMap();
+    map.eachLayer(function(layer) {
+        if (layer.options.id == 'flight-' + flightId) {
+            flightLayer = layer;
+        }
+    });
+    return flightLayer;
 }

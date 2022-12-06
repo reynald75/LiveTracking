@@ -20,7 +20,10 @@ export default ({
             laravel({
                 input: [
                     'resources/sass/app.scss',
-                    'resources/js/app.js',
+                    'resources/sass/map.scss',
+                    'resources/sass/interfaces.scss',
+                    'node_modules/leaflet/dist/leaflet.css',
+                    'resources/js/app.js'
                 ],
                 refresh: true,
             }),
