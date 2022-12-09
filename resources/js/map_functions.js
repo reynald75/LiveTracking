@@ -7,13 +7,17 @@ var map = null;
 
 function init(org_id) {
     initMap();
-    updatePilotsInFlight(org_id);
-    updateFlightPaths(org_id);
+    updateMap(org_id);
     $('#dropdown_pilots_btn').on("click", map_visuals.togglePilotsDropdown);
 
-    map.on("moveend", function() {
-        //updatePilotsInFlight(org_id);
+    setInterval(function() {
+        updateMap(org_id);
+    }, (1 * 60 * 1000));
+
+    window.addEventListener("beforeunload", function(e) {
+        setUpdates(false);
     });
+
 }
 
 function initMap() {
@@ -78,6 +82,31 @@ function showPosition(position) {
     ], 13);
 }
 
+function updateMap(org_id) {
+    setUpdates(true);
+    requestMessengerUpdates();
+    updatePilotsInFlight(org_id);
+    updateFlightPaths(org_id);
+}
+
+function setUpdates(value) {
+    $.ajax({
+        url: "/api/updates/set?value=" + ~~(value),
+        type: 'GET',
+        async: true,
+        dataType: "html"
+    });
+}
+
+function requestMessengerUpdates() {
+    $.ajax({
+        url: "/api/updates/request",
+        type: 'GET',
+        async: true,
+        dataType: "html",
+    });
+}
+
 function updatePilotsInFlight(org_id) {
     $.ajax({
         url: "/api/pilots/display?org_id=" + org_id,
@@ -85,7 +114,7 @@ function updatePilotsInFlight(org_id) {
         async: true,
         dataType: "html",
         error: function(data) {
-            console.log(data);
+            //console.log(data);
         },
         success: function(data) {
             $('#dropdown_pilots_content').html(data);
@@ -103,7 +132,7 @@ function updateFlightPaths(org_id) {
         async: true,
         dataType: "json",
         error: function(data) {
-            console.log(data);
+            //console.log(data);
         },
         success: function(data) {
             let layers = constructFlightPathLayers(data);

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Organization;
+use DateTime;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +17,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('updates')->insert([
+            'last_update_time' => date('Y-m-d\Th-m-s', 1),
+            'updates_enabled' => false
+        ]);
+
         $this->call(OrganizationSeeder::class);
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);

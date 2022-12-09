@@ -48,7 +48,7 @@ class UserSeeder extends Seeder
         $user2->assignRole('siteAdmin');
         $user3->assignRole('siteAdmin');
 
-        if (app()->environment('local', 'staging')) {
+        /*if (app()->environment('local', 'staging')) {
 
             for ($i=0; $i < 5; $i++) {
                 $user = User::create([
@@ -69,11 +69,29 @@ class UserSeeder extends Seeder
                     'batt_state' => 'GOOD'
                 ]);
             }
-        }
+        }*/
     
         Messenger::create([
             'user_id' => 1,
-            'feed_id' => '0-1234567',
+            'feed_id' => '0qm3EuuaEbIKRzUvi2EJzYHn77YAMcLi5',
+            'name' => '',
+            'model' => '',
+            'mfr' => 'SPOT',
+            'batt_state' => '',
+        ]);
+    
+        Messenger::create([
+            'user_id' => 2,
+            'feed_id' => '0fjDmqApjzhZBSjsUeXOHlmDBSZOfSGzd',
+            'name' => '',
+            'model' => '',
+            'mfr' => 'SPOT',
+            'batt_state' => '',
+        ]);
+    
+        Messenger::create([
+            'user_id' => 3,
+            'feed_id' => '0I7evhLHt03RRZxv3gu1gqibM7aIdbm2i',
             'name' => '',
             'model' => '',
             'mfr' => 'SPOT',

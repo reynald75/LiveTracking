@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UpdateController;
 use App\Http\Middleware\VerifyOrganization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,4 +28,9 @@ Route::middleware('organization')->group(function () {
     Route::prefix('/pilots')->group(function () {
         Route::get('/display', 'PilotInFlightController@showAllByOrgId');
     });
+});
+
+Route::prefix('updates')->group(function(){
+    Route::get('/set', 'UpdateController@setUpdate');
+    Route::get('/request', 'MessengerController@callFeeds');
 });
