@@ -23,10 +23,8 @@ class MessengerController extends Controller
                 $api_feed_params = '';
                 switch ($messenger->mfr) {
                     case 'SPOT':
-                        //$api_endpoint = 'https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/';
-                        $api_endpoint = 'http://127.0.0.1:9000/';
-
-                        //$date = date_create_from_format('Y-m-d', '2022-12-08');
+                        $api_endpoint = 'https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/';
+                        
                         $date = now();
 
                         $startDate = date_format($date, 'Y-m-d\T00:00:00-0000');
