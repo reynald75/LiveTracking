@@ -24,7 +24,7 @@ class MessengerController extends Controller
                 switch ($messenger->mfr) {
                     case 'SPOT':
                         $api_endpoint = 'https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/';
-                        
+
                         $date = now();
 
                         $startDate = date_format($date, 'Y-m-d\T00:00:00-0000');
@@ -72,25 +72,35 @@ class MessengerController extends Controller
 
 
             $newPointAdded = false;
-            foreach ($response->messages->message as $message) {
-                if (!GpsPoint::where('time', date("Y-m-d\TH:i:s", $message->unixTime))->exists()) {
-                    GpsPoint::create([
-                        'flight_id' => $flight->id,
-                        'lat' => $message->latitude,
-                        'lon' => $message->longitude,
-                        'alt' => $message->altitude,
-                        'msg_type' => $message->messageType,
-                        'msg_content' => $message->messageContent ?? "",
-                        'msg_show' => ($message->showCustomMsg == "Y"),
-                        'time' => date("Y-m-d\TH:i:s", $message->unixTime),
-                    ]);
-                    $newPointAdded = true;
+            if (is_array($response->messages->message)) {
+                foreach ($response->messages->message as $message) {
+                    $newPointAdded = ($this->registerPoint($flight, $message) | $newPointAdded);
                 }
+            } else {
+                $newPointAdded = $this->registerPoint($flight, $response->messages->message);
             }
 
             if ($newPointAdded) {
                 FlightController::calculateDistances($flight);
             }
+        }
+    }
+
+    private function registerPoint($flight, $message){
+        if (!GpsPoint::where('time', date("Y-m-d\TH:i:s", $message->unixTime))->exists()) {
+            GpsPoint::create([
+                'flight_id' => $flight->id,
+                'lat' => $message->latitude,
+                'lon' => $message->longitude,
+                'alt' => $message->altitude,
+                'msg_type' => $message->messageType,
+                'msg_content' => $message->messageContent ?? "",
+                'msg_show' => ($message->showCustomMsg == "Y"),
+                'time' => date("Y-m-d\TH:i:s", $message->unixTime),
+            ]);
+            return true;
+        } else {
+            return false;
         }
     }
 }
