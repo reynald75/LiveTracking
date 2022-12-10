@@ -38,8 +38,8 @@ class MessengerController extends Controller
 
                 $api_url = $api_endpoint . $messenger->feed_id . $api_feed_params;
                 $data = json_decode(file_get_contents($api_url));
-
-                $this->updateModels($messenger, $data->response->feedMessageResponse);
+                
+                $this->updateModels($messenger, $data->response);
 
                 sleep(4);
             }
@@ -48,40 +48,42 @@ class MessengerController extends Controller
 
     public function updateModels(Messenger $messenger, $response)
     {
-        if (isset($response->messages)) {
-            $user = $messenger->user()->first();
-            $flight = null;
-            if (!PilotInFlight::where('user_id', $user->id)->exists()) {
-                $flight = Flight::create([
-                    'user_id' => $user->id,
-                    'start_time' => now(),
-                    'end_time' => null,
-                    'dist_FAI' => 0,
-                    'dist_SD' => 0,
-                    'dist_actual' => 0
-                ]);
-                PilotInFlight::create([
-                    'user_id' => $user->id,
-                    'flight_id' => $flight->id,
-                    'is_flying' => false,
-                    'sos' => false
-                ]);
-            } else {
-                $flight = Flight::where('user_id', $user->id)->first();
-            }
-
-
-            $newPointAdded = false;
-            if (is_array($response->messages->message)) {
-                foreach ($response->messages->message as $message) {
-                    $newPointAdded = ($this->registerPoint($flight, $message) | $newPointAdded);
+        if (isset($response->feedMessageResponse)) {
+            $data = $response->feedMessageResponse;
+            if (isset($data->messages)) {
+                $user = $messenger->user()->first();
+                $flight = null;
+                if (!PilotInFlight::where('user_id', $user->id)->exists()) {
+                    $flight = Flight::create([
+                        'user_id' => $user->id,
+                        'start_time' => now(),
+                        'end_time' => null,
+                        'dist_FAI' => 0,
+                        'dist_SD' => 0,
+                        'dist_actual' => 0
+                    ]);
+                    PilotInFlight::create([
+                        'user_id' => $user->id,
+                        'flight_id' => $flight->id,
+                        'is_flying' => false,
+                        'sos' => false
+                    ]);
+                } else {
+                    $flight = Flight::where('user_id', $user->id)->first();
                 }
-            } else {
-                $newPointAdded = $this->registerPoint($flight, $response->messages->message);
-            }
-
-            if ($newPointAdded) {
-                FlightController::calculateDistances($flight);
+    
+                $newPointAdded = false;
+                if (is_array($data->messages->message)) {
+                    foreach ($data->messages->message as $message) {
+                        $newPointAdded = ($this->registerPoint($flight, $message) | $newPointAdded);
+                    }
+                } else {
+                    $newPointAdded = $this->registerPoint($flight, $data->messages->message);
+                }
+    
+                if ($newPointAdded) {
+                    FlightController::calculateDistances($flight);
+                }
             }
         }
     }
