@@ -109,18 +109,24 @@ function requestMessengerUpdates() {
 
 function updatePilotsInFlight(org_id) {
     $.ajax({
-        url: "/api/pilots/display?org_id=" + org_id,
+        url: "/api/pilots/display/bubbles?org_id=" + org_id,
         type: 'GET',
         async: true,
         dataType: "html",
-        error: function(data) {
-            //console.log(data);
-        },
         success: function(data) {
             $('#dropdown_pilots_content').html(data);
             let bubbles = $('.dropdown_pilot_bubble_container');
             map_visuals.setPilotBubbles(bubbles, 0);
             $('.dropdown_pilot_bubble_button').on("click", map_visuals.toggleFlightInfo);
+        }
+    });
+    $.ajax({
+        url: "/api/pilots/display/menu?org_id=" + org_id,
+        type: 'GET',
+        async: true,
+        dataType: "html",
+        success: function(data) {
+            $('#pilot_menu_table_content').html(data);
         }
     });
 }
@@ -131,9 +137,6 @@ function updateFlightPaths(org_id) {
         type: 'GET',
         async: true,
         dataType: "json",
-        error: function(data) {
-            //console.log(data);
-        },
         success: function(data) {
             let layers = constructFlightPathLayers(data);
             let layerGroup;

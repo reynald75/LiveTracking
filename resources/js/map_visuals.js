@@ -7,7 +7,8 @@ export default {
     focusOnFlight,
     flyToLastPoint,
     toggleFlightPathMarkers,
-    toggleFlightPath
+    toggleFlightPath,
+    togglePilotMenu
 }
 
 function togglePilotsDropdown() {
@@ -16,9 +17,9 @@ function togglePilotsDropdown() {
     let bubbles = $('.dropdown_pilot_bubble_container');
 
     if (open) {
+        stowPilotBubbles(bubbles);
         contentContainer.removeClass('content_open');
         contentContainer.addClass('content_closed');
-        stowPilotBubbles(bubbles);
     } else {
         contentContainer.removeClass('content_closed');
         contentContainer.addClass('content_open');
@@ -38,7 +39,7 @@ function moveBubbles(bubbles, duration, yCalc) {
 
 function setPilotBubbles(bubbles, duration = 0.5) {
     let yCalc = function(index) {
-        return (85 + 15) * (index + 1);
+        return (85 + 35 + 15) * (index + 1);
     };
     moveBubbles(bubbles, duration, yCalc);
 }
@@ -79,6 +80,15 @@ function toggleFlightInfo(sender) {
         flightInfoSpan.style.display = "inline-block";
     } else {
         flightInfoSpan.style.display = "none";
+    }
+}
+
+function togglePilotMenu() {
+    let table = $('#pilot_menu_table')[0];
+    if (table.style.display != "block") {
+        table.style.display = "block";
+    } else {
+        table.style.display = "none";
     }
 }
 

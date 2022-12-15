@@ -25,8 +25,9 @@ Route::middleware('organization')->group(function () {
         Route::get('/active', 'FlightController@getActiveFlightPathsByOrgId');
     });
 
-    Route::prefix('/pilots')->group(function () {
-        Route::get('/display', 'PilotInFlightController@showAllByOrgId');
+    Route::prefix('/pilots/display')->group(function () {
+        Route::get('/bubbles', 'PilotInFlightController@showAllBubblesByOrgId');
+        Route::get('/menu', 'PilotInFlightController@showAllMenuEntriesByOrgId');
     });
 });
 

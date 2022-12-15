@@ -1,21 +1,36 @@
+/*
+* Prefixed by:
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 $dropdown_button_size: 85px;
 $dropdown_button_offset_side: 10px;
 
-.dropdown_button_container {
+#img_afr_logo {
+    height: 2.5rem;
+}
+
+.map_overlay_container {
     display: block;
     position: absolute;
     pointer-events: none;
+    z-index: 401;
 }
 
 #dropdown_pilots_btn {
     position: absolute;
     z-index: 2;
-    background-color: white;
+    background-color: transparent;
     border: 1px solid black;
+    padding: 0px;
+    margin-top: 30px;
 }
 
-.dropdown_button_container button {
+.map_overlay_container button {
     pointer-events: all;
+    cursor: pointer;
 }
 
 #dropdown_pilots_btn,
@@ -41,32 +56,29 @@ $dropdown_button_offset_side: 10px;
     line-height: 1.5rem;
 }
 
-.dropdown_button_container img {
+.map_overlay_container img {
     height: 100%;
     width: 100%;
 }
 
-#dropdown_pilots_btn,
-#dropdown_pilots_btn img,
+.btn,
 .dropdown_pilot_bubble_button {
     border-radius: 75px !important;
+    margin-left: $dropdown_button_offset_side;
 }
 
 #dropdown_pilots_btn,
 .dropdown_pilot_bubble_button {
+    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
 }
 
 #dropdown_pilots_container {
-    top: 150px;
-    left: $dropdown_button_offset_side;
-    height: calc(100% - 150px);
-}
-
-.dropdown_content {
-    height: calc(100% - $dropdown_button_size);
-    pointer-events: none;
-    overflow: scroll;
+    top: 60px;
+    left: 0px;
+    height: calc(100% - 120px);
+    width: calc(100% - $dropdown_button_offset_side);
+    overflow-y: scroll;
 }
 
 .dropdown_pilot_bubble_container {
@@ -74,9 +86,13 @@ $dropdown_button_offset_side: 10px;
     top: 0;
     left: 0;
     z-index: 0;
-    height: auto;
-    width: 500px;
+    height: 145px;
+    width: 380px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 }
 
@@ -103,26 +119,85 @@ $dropdown_button_offset_side: 10px;
     background-color: white;
     padding: 4px;
     border: 1px solid black;
-    margin-left: 20px;
+    margin-left: 10px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 15px;
 }
 
-.dropdown_pilot_bubble_info_buttons button {
+.dropdown_pilot_bubble_info_content table thead {
+    max-width: 100%;
+}
+
+.dropdown_pilot_bubble_info_button {
     height: 40px;
     width: 40px;
     background-color: white;
     border-radius: 40px;
     border: 0px solid gray;
     margin: 0px 0px 5px 5px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px;
+}
+
+.dropdown_pilot_bubble_info_button svg {
+    width: 100%;
+    height: 100%;
 }
 
 #dropdown_pilot_bubble_info_content_values p {
     text-align: right;
 }
 
+#pilot_menu_container {
+    top: 10px;
+    left: 100px;
+}
+
+#pilot_menu_btn {
+    height: $dropdown_button_size;
+    width: $dropdown_button_size;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid black;
+    margin: 0px;
+}
+
+#pilot_menu_table {
+    background-color: rgba(255, 255, 255, 0.8);
+    overflow: scroll;
+    display: none;
+    pointer-events: all;
+}
+
+#pilot_menu_action_button_container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+#pilot_menu_action_button_container button {
+    height: 2rem;
+    width: 2rem;
+}
+
 #map {
     height: 100%;
     width: 100%;
+    -webkit-filter: saturate(2);
     filter: saturate(2);
+}
+
+@media only screen and (max-width: 600px) {
+    #pilot_menu_container {
+        width: 275px;
+    }
 }

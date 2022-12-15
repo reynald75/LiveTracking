@@ -18,7 +18,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user1 = User::create([
-            'name' => 'Romain Binggeli',
+            'first_name' => 'Romain',
+            'last_name' => 'Binggeli',
             'initials' => 'RB',
             'email' => 'rb@example.com',
             'password' => Hash::make('password'),
@@ -27,32 +28,35 @@ class UserSeeder extends Seeder
         ]);
 
         $user2 = User::create([
-            'name' => 'Martin Müller',
+            'first_name' => 'Martin',
+            'last_name' => 'Müller',
             'initials' => 'MM',
             'email' => 'mm@example.com',
             'password' => Hash::make('password'),
             'organization_id' => 1,
-            'line_color' => '#FF0000'
+            'line_color' => '#00FF00'
         ]);
 
         $user3 = User::create([
-            'name' => 'Reynald Mumenthaler',
+            'first_name' => 'Reynald',
+            'last_name' => 'Mumenthaler',
             'initials' => 'RM',
             'email' => 'rm@example.com',
             'password' => Hash::make('password'),
             'organization_id' => 1,
-            'line_color' => '#FF0000'
+            'line_color' => '#0000FF'
         ]);
 
         $user1->assignRole('siteAdmin');
         $user2->assignRole('siteAdmin');
         $user3->assignRole('siteAdmin');
 
-        /*if (app()->environment('local', 'staging')) {
+        if (app()->environment('local', 'staging')) {
 
             for ($i=0; $i < 5; $i++) {
                 $user = User::create([
-                    'name' => 'Test ' . $i,
+                    'first_name' => 'Test',
+                    'last_name' => $i,
                     'initials' => 'T' . $i,
                     'email' => 'invalid' . $i . '@example.com',
                     'password' => Hash::make('password'),
@@ -69,20 +73,20 @@ class UserSeeder extends Seeder
                     'batt_state' => 'GOOD'
                 ]);
             }
-        }*/
+        }
     
         Messenger::create([
             'user_id' => 1,
-            'feed_id' => '0qm3EuuaEbIKRzUvi2EJzYHn77YAMcLi5',
+            'feed_id' => '0-1234567',
             'name' => '',
             'model' => '',
             'mfr' => 'SPOT',
             'batt_state' => '',
         ]);
     
-        Messenger::create([
+        /*Messenger::create([
             'user_id' => 2,
-            'feed_id' => '0fjDmqApjzhZBSjsUeXOHlmDBSZOfSGzd',
+            'feed_id' => '0-0',
             'name' => '',
             'model' => '',
             'mfr' => 'SPOT',
@@ -91,12 +95,12 @@ class UserSeeder extends Seeder
     
         Messenger::create([
             'user_id' => 3,
-            'feed_id' => '0I7evhLHt03RRZxv3gu1gqibM7aIdbm2i',
+            'feed_id' => '0-0',
             'name' => '',
             'model' => '',
             'mfr' => 'SPOT',
             'batt_state' => '',
-        ]);
+        ]);*/
     }
 
     function rand_color() {

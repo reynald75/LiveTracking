@@ -33,40 +33,12 @@ class PilotInFlightController extends Controller
         return PilotInFlight::whereBelongsTo($org_users)->get();
     }
 
-
     /**
-     * Show the form for creating a new resource.
+     * Build viewData for all pilots in flight in org.
      *
-     * @return \Illuminate\Http\Response
+     * @return viewData array
      */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        /*$request->validate([
-            'user_id' => 'required|integer',
-            'flight_id' => 'required|integer',
-            'is_flying' => 'required|boolean',
-            'sos' => 'required|boolean',
-        ]);
-        PilotInFlight::create()*/
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function showAllByOrgId(Request $request)
+    private function showAllByOrgId(Request $request)
     {
         $pilots = $this->getAllByOrgId($request->org_id);
         $viewData = [];
@@ -81,40 +53,26 @@ class PilotInFlightController extends Controller
             array_push($viewData, $pilotData);
         }
 
+        return $viewData;
+    }
+
+    /**
+     * Display pilot bubbles for active pilots.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showAllBubblesByOrgId(Request $request){
+        $viewData = $this->showAllByOrgId($request);
         return view('subviews.pilot_bubble')->with('viewData', $viewData);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Display pilot menu entries for active pilots.
      *
-     * @param  \App\Models\PilotInFlight  $pilotInFlight
      * @return \Illuminate\Http\Response
      */
-    public function edit(PilotInFlight $pilotInFlight)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PilotInFlight  $pilotInFlight
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, PilotInFlight $pilotInFlight)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\PilotInFlight  $pilotInFlight
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(PilotInFlight $pilotInFlight)
-    {
-        //
+    public function showAllMenuEntriesByOrgId(Request $request){
+        $viewData = $this->showAllByOrgId($request);
+        return view('subviews.pilot_menu_entry')->with('viewData', $viewData);
     }
 }
