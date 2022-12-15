@@ -77,16 +77,16 @@ class UserSeeder extends Seeder
     
         Messenger::create([
             'user_id' => 1,
-            'feed_id' => '0-1234567',
+            'feed_id' => '0qm3EuuaEbIKRzUvi2EJzYHn77YAMcLi5',
             'name' => '',
             'model' => '',
             'mfr' => 'SPOT',
             'batt_state' => '',
         ]);
     
-        /*Messenger::create([
+        Messenger::create([
             'user_id' => 2,
-            'feed_id' => '0-0',
+            'feed_id' => '0fjDmqApjzhZBSjsUeXOHlmDBSZOfSGzd',
             'name' => '',
             'model' => '',
             'mfr' => 'SPOT',
@@ -95,12 +95,12 @@ class UserSeeder extends Seeder
     
         Messenger::create([
             'user_id' => 3,
-            'feed_id' => '0-0',
+            'feed_id' => '0I7evhLHt03RRZxv3gu1gqibM7aIdbm2i',
             'name' => '',
             'model' => '',
             'mfr' => 'SPOT',
             'batt_state' => '',
-        ]);*/
+        ]);
     }
 
     function rand_color() {
