@@ -34,4 +34,5 @@ Route::middleware('organization')->group(function () {
 Route::prefix('updates')->group(function(){
     Route::get('/set', 'UpdateController@setUpdate');
     Route::get('/request', 'MessengerController@callFeeds');
+    Route::get('/clean', 'UpdateController@clearOldEntries');
 });
