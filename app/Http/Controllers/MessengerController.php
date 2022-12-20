@@ -7,6 +7,7 @@ use App\Models\GpsPoint;
 use App\Models\Messenger;
 use App\Models\PilotInFlight;
 use App\Http\Controllers\UpdateController;
+use DateTime;
 
 class MessengerController extends Controller
 {
@@ -53,6 +54,7 @@ class MessengerController extends Controller
             if (isset($data->messages)) {
                 $user = $messenger->user()->first();
                 $flight = null;
+                $dateTime = new DateTime();
                 if (!PilotInFlight::where('user_id', $user->id)->exists()) {
                     $flight = Flight::create([
                         'user_id' => $user->id,
@@ -69,7 +71,11 @@ class MessengerController extends Controller
                         'sos' => false
                     ]);
                 } else {
-                    $flight = Flight::where('user_id', $user->id)->first();
+                    $flightAttrs = [
+                        'user_id', '=', $user->id,
+                        'start_time', '>=', $dateTime->format("Y-m-d") 
+                    ];
+                    $flight = Flight::where($flightAttrs)->first();
                 }
     
                 $newPointAdded = false;

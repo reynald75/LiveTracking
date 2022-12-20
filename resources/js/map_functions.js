@@ -31,11 +31,6 @@ function initMap() {
         attribution: '&copy; <a href="https://opentopomap.org/credits">OpenTopoMap</a>'
     });
 
-    let satelliteLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-        maxZoom: 18,
-        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-    });
-
     let thunderforestLayer = L.tileLayer('https://tile.thunderforest.com/landscape/{z}/{x}/{y}.png?apikey=' + THUNDERFOREST_API_KEY, {
         maxZoom: 18,
         attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -44,7 +39,7 @@ function initMap() {
     map = L.map('map', {
         center: [47, 8],
         zoom: 9,
-        layers: [opentopoLayer, openstreetmapLayer, satelliteLayer, thunderforestLayer]
+        layers: [opentopoLayer, openstreetmapLayer, thunderforestLayer]
     });
 
     let flightPaths = L.layerGroup([], {
@@ -54,7 +49,6 @@ function initMap() {
     let baseMaps = {
         "OpenStreetMap": openstreetmapLayer,
         "OpenTopoMap": opentopoLayer,
-        "Satellite": satelliteLayer,
         "ThunderForest Landscape": thunderforestLayer
     };
 
