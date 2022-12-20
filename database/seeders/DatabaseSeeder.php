@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('updates')->insert([
-            'last_update_time' => date('Y-m-d\Th-m-s', 1),
-            'updates_enabled' => false
+            'id' => 'gps_update',
+            'last_update_time' => date('Y-m-d\Th-m-s', 1)
         ]);
 
         $this->call(OrganizationSeeder::class);

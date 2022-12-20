@@ -14,9 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('updates', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->dateTime('last_update_time');
-            $table->boolean('updates_enabled');
         });
     }
 

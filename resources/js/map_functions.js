@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 export default {
     init,
     getMap
@@ -13,10 +15,6 @@ function init(org_id) {
     setInterval(function() {
         updateMap(org_id);
     }, (1 * 60 * 1000));
-
-    window.addEventListener("beforeunload", function(e) {
-        setUpdates(false);
-    });
 
 }
 
@@ -77,19 +75,9 @@ function showPosition(position) {
 }
 
 function updateMap(org_id) {
-    setUpdates(true);
     requestMessengerUpdates();
     updatePilotsInFlight(org_id);
     updateFlightPaths(org_id);
-}
-
-function setUpdates(value) {
-    $.ajax({
-        url: "/api/updates/set?value=" + ~~(value),
-        type: 'GET',
-        async: true,
-        dataType: "html"
-    });
 }
 
 function requestMessengerUpdates() {
@@ -176,38 +164,56 @@ function constructFlightPathLayers(data) {
 }
 
 function createMarkers(flight, layer) {
-    flight.points.sort(function(a, b) {
-        return a.time > b.time;
-    });
+    let points = _.sortBy(flight.points, ['time']);
 
     const markerTemplate = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon-svg" style="width:32px;height:48px">' +
         '<path class="svg-icon-path" d="m1 16 15 30 15-30a8 8 0 0 0-30 0Z" stroke-width="2" stroke="COLOR" stroke-opacity="undefined" fill="COLOR" fill-opacity=".4"/>' +
         '<circle class="svg-icon-circle" cx="16" cy="16" r="10" fill="#FFF" stroke="COLOR" stroke-width="2"/>' +
-        '<text text-anchor="middle" x="16" y="18.8" style="font-size:11.5px" fill="rgba(0, 0, 0,1)">TEXT</text>' +
+        '<text text-anchor="middle" x="16" y="18.8" style="font-size:11.5px" fill="TXTCLR">TEXT</text>' +
         '</svg>';
 
-    _.forEach(flight.points, function(point) {
+    _.forEach(points, function(point) {
         let markerColor;
         let markerText;
+        let markerTextColor = "#000000";
 
-        switch (_.indexOf(flight.points, point)) {
-            case 0:
-                markerColor = "#0000FF"
-                markerText = "ST";
+        switch (point.msg_type) {
+            default:
+            case 'TRACK':
+            case 'UNLIMITED-TRACK':
+            case 'SIMPLE-POINT':
+
+                switch (_.indexOf(points, point)) {
+                    case 0:
+                        markerColor = "#0000FF"
+                        markerText = "ST";
+                        break;
+                    case points.length - 1:
+                        markerColor = flight.user.line_color;
+                        markerText = "TK";
+                        break;
+                    default:
+                        markerColor = flight.user.line_color;
+                        markerText = _.indexOf(points, point);
+                        break;
+                }
                 break;
-            case flight.points.length - 1:
-                markerColor = "#000000";
+            case 'OK':
+                markerColor = "#228B22";
                 markerText = "OK";
                 break;
-            default:
-                markerColor = flight.user.line_color;
-                markerText = _.indexOf(flight.points, point);
+            case 'HELP':
+            case 'SOS':
+                markerColor = "#000000";
+                markerText = "SOS";
+                markerTextColor = "#FF0000";
                 break;
         }
 
         let markerSvg = markerTemplate;
         markerSvg = markerSvg.replaceAll('COLOR', markerColor);
         markerSvg = markerSvg.replace('TEXT', markerText);
+        markerSvg = markerSvg.replace('TXTCLR', markerTextColor);
         let markerIconUrl = 'data:image/svg+xml;base64,' + btoa(markerSvg);
 
         let icon = L.icon({
@@ -219,9 +225,9 @@ function createMarkers(flight, layer) {
         });
 
         let info_marker = L.marker([point.lat, point.lon], {
-            id: 'flight_info_marker-' + flight.id + (point == flight.points.at(-1) ? '_last' : ''),
+            id: 'flight_info_marker-' + flight.id + (point == points.at(-1) ? '_last' : ''),
             icon: icon,
-            zIndexOffset: (point == flight.points.at(0) || point == flight.points.at(-1) ? 1000 : _.indexOf(flight.points, point) * 10)
+            zIndexOffset: (point == points.at(0) || point == points.at(-1) ? 1000 : _.indexOf(points, point) * 10)
         });
 
         addMarkerPopup(info_marker, point);

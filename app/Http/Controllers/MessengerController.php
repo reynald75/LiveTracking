@@ -24,7 +24,11 @@ class MessengerController extends Controller
                 $api_feed_params = '';
                 switch ($messenger->mfr) {
                     case 'SPOT':
-                        $api_endpoint = 'https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/';
+                        if (app()->environment('local', 'staging')) {
+                            $api_endpoint = 'http://127.0.0.1:9000/';
+                        } else {
+                            $api_endpoint = 'https://api.findmespot.com/spot-main-web/consumer/rest-api/2.0/public/feed/';
+                        }
 
                         $date = now();
 
@@ -42,7 +46,9 @@ class MessengerController extends Controller
                 
                 $this->updateModels($messenger, $data->response);
 
-                sleep(4);
+                if (!app()->environment('local', 'staging')) {
+                    sleep(4);
+                }
             }
         }
     }
@@ -72,8 +78,8 @@ class MessengerController extends Controller
                     ]);
                 } else {
                     $flightAttrs = [
-                        'user_id', '=', $user->id,
-                        'start_time', '>=', $dateTime->format("Y-m-d") 
+                        ['user_id', '=', $user->id],
+                        ['start_time', '>=', $dateTime->format("Y-m-d")]
                     ];
                     $flight = Flight::where($flightAttrs)->first();
                 }
@@ -95,7 +101,12 @@ class MessengerController extends Controller
     }
 
     private function registerPoint($flight, $message){
-        if (!GpsPoint::where('time', date("Y-m-d\TH:i:s", $message->unixTime))->exists()) {
+        $point_attrs = [
+            ['time', '=', date("Y-m-d\TH:i:s", $message->unixTime)],
+            ['lat', '=', $message->latitude ],
+            ['lon', '=', $message->longitude ]
+        ];
+        if (!GpsPoint::where($point_attrs)->exists()) {
             GpsPoint::create([
                 'flight_id' => $flight->id,
                 'lat' => $message->latitude,

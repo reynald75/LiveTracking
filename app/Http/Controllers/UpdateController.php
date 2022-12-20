@@ -9,34 +9,25 @@ use App\Models\Flight;
 use DateInterval;
 use DateTime;
 
-class UpdateController extends Controller {
-    static function setUpdate(Request $request){
-        $request->validate([
-            'value' => 'boolean'
-        ]);
+class UpdateController extends Controller
+{
 
-        $updateData = Update::find(1);
-        $updateData->updates_enabled = filter_var($request->value,FILTER_VALIDATE_BOOLEAN);
-        $updateData->save();
-    }
-
-    static function setLastUpdateTime($value){
-        $updateData = Update::find(1);
+    static function setLastUpdateTime($value)
+    {
+        $updateData = Update::find('gps_update');
         $updateData->last_update_time = $value;
         $updateData->save();
     }
 
-    static function hasUpdateDelayExpired(){
-        $updateData = Update::find(1);
-        if($updateData->updates_enabled){
-            $diff = (now()->timestamp - strtotime($updateData->last_update_time)) / 60;
-            return ($diff >= env('MESSENGER_API_UPDATE_DELAY'));
-        } else {
-            return false;
-        }
+    static function hasUpdateDelayExpired()
+    {
+        $updateData = Update::find('gps_update');
+        $diff = (now()->timestamp - strtotime($updateData->last_update_time)) / 60;
+        return ($diff >= env('MESSENGER_API_UPDATE_DELAY'));
     }
-    
-    static function clearOldEntries(){
+
+    static function clearOldEntries()
+    {
         $dateTime = new DateTime();
         PilotInFlight::where('created_at', '<=', $dateTime->format("Y-m-d"))->delete();
 

@@ -10,9 +10,10 @@ class Update extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'last_update_time',
-        'updates_enabled'
     ];
 
     public $timestamps = false;
+    public $incrementing = false;
 }
