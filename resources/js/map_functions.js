@@ -151,6 +151,8 @@ function constructFlightPathLayers(data) {
             id: 'flight-' + flight.id
         });
 
+        flight.points = _.sortBy(flight.points, ['time']);
+
         layer.addLayer(L.polyline(flight.points.map(p => [p.lat, p.lon, p.alt]), {
             color: flight.user.line_color,
             id: 'flight_polyline-' + flight.id
@@ -164,15 +166,13 @@ function constructFlightPathLayers(data) {
 }
 
 function createMarkers(flight, layer) {
-    let points = _.sortBy(flight.points, ['time']);
-
     const markerTemplate = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-icon-svg" style="width:32px;height:48px">' +
         '<path class="svg-icon-path" d="m1 16 15 30 15-30a8 8 0 0 0-30 0Z" stroke-width="2" stroke="COLOR" stroke-opacity="undefined" fill="COLOR" fill-opacity=".4"/>' +
         '<circle class="svg-icon-circle" cx="16" cy="16" r="10" fill="#FFF" stroke="COLOR" stroke-width="2"/>' +
         '<text text-anchor="middle" x="16" y="18.8" style="font-size:11.5px" fill="TXTCLR">TEXT</text>' +
         '</svg>';
 
-    _.forEach(points, function(point) {
+    _.forEach(flight.points, function(point) {
         let markerColor;
         let markerText;
         let markerTextColor = "#000000";
@@ -183,18 +183,18 @@ function createMarkers(flight, layer) {
             case 'UNLIMITED-TRACK':
             case 'SIMPLE-POINT':
 
-                switch (_.indexOf(points, point)) {
+                switch (_.indexOf(flight.points, point)) {
                     case 0:
                         markerColor = "#0000FF"
                         markerText = "ST";
                         break;
-                    case points.length - 1:
+                    case flight.points.length - 1:
                         markerColor = flight.user.line_color;
                         markerText = "TK";
                         break;
                     default:
                         markerColor = flight.user.line_color;
-                        markerText = _.indexOf(points, point);
+                        markerText = _.indexOf(flight.points, point);
                         break;
                 }
                 break;
@@ -225,9 +225,9 @@ function createMarkers(flight, layer) {
         });
 
         let info_marker = L.marker([point.lat, point.lon], {
-            id: 'flight_info_marker-' + flight.id + (point == points.at(-1) ? '_last' : ''),
+            id: 'flight_info_marker-' + flight.id + (point == flight.points.at(-1) ? '_last' : ''),
             icon: icon,
-            zIndexOffset: (point == points.at(0) || point == points.at(-1) ? 1000 : _.indexOf(points, point) * 10)
+            zIndexOffset: (point == flight.points.at(0) || point == flight.points.at(-1) ? 1000 : _.indexOf(flight.points, point) * 10)
         });
 
         addMarkerPopup(info_marker, point);
