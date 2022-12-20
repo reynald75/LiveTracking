@@ -3,7 +3,9 @@
 @section('content')
     <link rel="stylesheet" href="{{ Vite::Asset('resources/sass/map.scss') }}" />
     <link rel="stylesheet" href="{{ Vite::Asset('node_modules/leaflet/dist/leaflet.css') }}" />
-    <div id="map">
+    <div id="content_container">
+        <div id="map">
+        </div>
         <!--Bouton Pilotes-->
         <div class="map_overlay_container" id="dropdown_pilots_container">
             <button class="btn btn-secondary" id="dropdown_pilots_btn">

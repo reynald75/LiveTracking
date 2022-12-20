@@ -16,7 +16,7 @@ $dropdown_button_offset_side: 10px;
     display: block;
     position: absolute;
     pointer-events: none;
-    z-index: 401;
+    z-index: 1000;
 }
 
 #dropdown_pilots_btn {
@@ -154,8 +154,8 @@ $dropdown_button_offset_side: 10px;
 }
 
 #pilot_menu_btn {
-    height: $dropdown_button_size;
-    width: $dropdown_button_size;
+    height: calc($dropdown_button_size / 1.5);
+    width: calc($dropdown_button_size / 1.5);
     background-color: rgba(255, 255, 255, 0.8);
     border: 1px solid black;
     margin: 0px;
@@ -200,4 +200,10 @@ $dropdown_button_offset_side: 10px;
     #pilot_menu_container {
         width: 275px;
     }
+}
+
+#content_container {
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
