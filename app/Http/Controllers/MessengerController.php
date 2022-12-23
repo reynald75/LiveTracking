@@ -112,6 +112,8 @@ class MessengerController extends Controller
                 'lat' => $message->latitude,
                 'lon' => $message->longitude,
                 'alt' => $message->altitude,
+                'dist_LP' => 0,
+                'avg_speed' => 0,
                 'msg_type' => $message->messageType,
                 'msg_content' => $message->messageContent ?? "",
                 'msg_show' => ($message->showCustomMsg == "Y"),

@@ -38,9 +38,9 @@ class GpsPointController extends Controller
     /**
      * Return the GpsPoint from the specified Flight.
      *
-        * @param  int  $id
-        * @return Response
-        */
+     * @param  int  $id
+     * @return Response
+     */
     public function getAllFromFlight(Flight $flight)
     {
         return GpsPoint::where('flight_id', $flight->id)
@@ -48,24 +48,9 @@ class GpsPointController extends Controller
     }
 
     /**
-     * Return the resource with specified id.
-     *
-        * @param  int  $id
-        * @return Response
-        */
-    public function getById($id)
-    {
-        return GpsPoint::find($id);
-    }
+     * 
+     */
+    static function calculateAverageSpeed(GpsPoint $point, GpsPoint $lastPoint){
 
-    /**
-     * Return the resource with specified id.
-     *
-        * @param  int  $id
-        * @return Response
-        */
-    public function getByAll()
-    {
-        return GpsPoint::all();
     }
 }

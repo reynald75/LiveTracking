@@ -19,6 +19,8 @@ class GpsPoint extends Model
         'lat',
         'lon',
         'alt',
+        'dist_LP',
+        'avg_speed',
         'msg_type',
         'msg_content',
         'msg_show',
