@@ -42,12 +42,12 @@
                         @auth
                             @hasrole('siteAdmin')
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('site_administration') }}">{{ __('Gestion site') }}</a>
+                                    <a class="nav-link" href="{{ route('site_administration') }}">{{ __('Site mgmt.') }}</a>
                                 </li>
                             @endhasrole
                             @hasanyrole(['siteAdmin', 'orgAdmin'])
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('org_administration') }}">{{ __('Gestion organisation') }}</a>
+                                    <a class="nav-link" href="{{ route('org_administration') }}">{{ __('Organization mgmt.') }}</a>
                                 </li>
                             @endhasanyrole
                         @endauth

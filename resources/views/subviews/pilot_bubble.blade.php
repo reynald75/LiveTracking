@@ -17,11 +17,11 @@
                     </th>
                     <tr>
                         <td id="dropdown_pilot_bubble_info_content_labels">
-                            <p><b>Dist. parcouru:</b></p>
-                            <p><b>Dist. décollage:</b></p>
+                            <p><b>Dist. flown:</b></p>
+                            <p><b>Dist. T.Off:</b></p>
                             <p><b>Altitude:</b></p>
-                            <p><b>Vitesse moy.:</b></p>
-                            <p><b>Dernier contact:</b></p>
+                            <p><b>Avg. speed:</b></p>
+                            <p><b>Last contact:</b></p>
                         </td>
                         <td id="dropdown_pilot_bubble_info_content_values">
                             <p><b>{{ number_format($data['flight_info']['dist_actual'] / 1000, 1)}}km</b></p>

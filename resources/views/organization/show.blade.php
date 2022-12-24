@@ -5,7 +5,7 @@
         @hasrole('siteAdmin')
             <button class="btn btn-primary" id="orgAdd">
                 <a href="{{ URL::to('organization/create') }}">
-                    <x-fas-users-rays /> Ajouter organisation
+                    <x-fas-users-rays /> Add organization
                 </a>
             </button>
         @endhasrole
@@ -17,7 +17,7 @@
                     <button class="accordion-button" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapse{{ $org->id }}" aria-expanded="true"
                         aria-controls="collapse{{ $org->id }}">
-                        <x-fas-users-rays /> Organisation: {{ $org->name }}
+                        <x-fas-users-rays /> Organization: {{ $org->name }}
                     </button>
                 </h2>
                 <div id="collapse{{ $org->id }}" class="accordion-collapse collapse show"
@@ -27,10 +27,10 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <td>Nom</td>
-                                    <td>Initiales</td>
+                                    <td>Name</td>
+                                    <td>Initials</td>
                                     <td>E-mail</td>
-                                    <td>Couleur</td>
+                                    <td>Color</td>
                                     <td>Role(s)</td>
                                     <td>Actions</td>
                                 </tr>
@@ -73,7 +73,7 @@
                         </table>
                         <button class="btn btn-primary" id="userAdd">
                             <a href="{{ URL::to('pilots/create') }}">
-                                <x-fas-user-plus /> Ajouter utilisateur
+                                <x-fas-user-plus /> Add user
                             </a>
                         </button>
                     </div>
