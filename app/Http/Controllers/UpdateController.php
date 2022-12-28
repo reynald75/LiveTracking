@@ -6,6 +6,7 @@ use App\Models\Update;
 use Illuminate\Http\Request;
 use App\Models\PilotInFlight;
 use App\Models\Flight;
+use App\Models\GpsPoint;
 use DateInterval;
 use DateTime;
 
@@ -33,5 +34,6 @@ class UpdateController extends Controller
 
         $dateTime->sub(new DateInterval("P7D")); //Sub 7 days from current date
         Flight::where('created_at', '<=', $dateTime->format("Y-m-d"))->delete();
+        GpsPoint::where('time', '<=', $dateTime->format("Y-m-d"))->delete();
     }
 }
