@@ -19,9 +19,5 @@ class OrganizationSeeder extends Seeder
             'name' => 'AlpsFreeRide',
             'ref_uuid' => 'd5e5622e-c856-46a0-a4cc-7484a827e549'
         ]);
-        Organization::create([
-            'name' => 'OtherOrg',
-            'ref_uuid' => 'c8874188-5023-42d5-83bb-8059dbbac490'
-        ]);
     }
 }
