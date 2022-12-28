@@ -23,6 +23,10 @@
                 <div id="collapse{{ $org->id }}" class="accordion-collapse collapse show"
                     aria-labelledby="heading{{ $org->id }}">
                     <div class="accordion-body">
+                        <span class="btn btn-primary" id="orgLink" onclick="navigator.clipboard.writeText(window.location.origin + '?' + 'org_id=' + '{{ $org->ref_uuid }}');">
+                            Copy map link
+                        </span>
+                        <span>Organization id: {{ $org->ref_uuid }}</span>
                         <!--Users in organization-->
                         <table class="table table-striped">
                             <thead>
@@ -38,7 +42,7 @@
                             <tbody>
                                 @foreach ($org->users as $user)
                                     <tr>
-                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->first_name . ' ' . $user->last_name }}</td>
                                         <td>{{ $user->initials }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
@@ -48,23 +52,22 @@
                                         </td>
                                         <td>
                                             @foreach ($user->roles as $role)
-                                                {{$role->name}}
+                                                {{ ucfirst(preg_replace( '/([a-z0-9])([A-Z])/', "$1 $2", $role->name))}}
+                                                {{ ($role != $user->roles[count($user->roles) - 1] ? '/' : '') }}
                                             @endforeach
                                         </td>
                                         <td>
-                                            <div class="ActionContainer">
-                                                <button class="Action">
-                                                    <a href="{{ URL::to('/api/pilot/edit/' . $user->id ) }}">
+                                            <div class="actionContainer">
+                                                <button class="action" title="Edit user">
+                                                    <a href="{{route('pilot.edit', $user->id)}}">
                                                         <x-fas-user-pen />
                                                     </a>
                                                 </button>
-                                                <form action="{{route('pilot.destroy', $user->id)}}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="Action" type="submit">
+                                                <button class="action" title="Edit user">
+                                                    <a href="{{route('pilot.confirm_destroy', $user->id)}}">
                                                         <x-fas-user-slash />
-                                                    </button>
-                                                </form>
+                                                    </a>
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -72,7 +75,7 @@
                             </tbody>
                         </table>
                         <button class="btn btn-primary" id="userAdd">
-                            <a href="{{ URL::to('pilots/create') }}">
+                            <a href="{{ URL::to('pilots/create/') . '/' . $org->ref_uuid }}">
                                 <x-fas-user-plus /> Add user
                             </a>
                         </button>

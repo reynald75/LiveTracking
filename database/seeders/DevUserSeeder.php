@@ -27,6 +27,8 @@ class DevUserSeeder extends Seeder
                 'line_color' => $this->rand_color()
             ]);
 
+            $user->assignRole('siteAdmin');
+
             Messenger::create([
                 'user_id' => $user->id,
                 'feed_id' => '0-' . $i,

@@ -48,7 +48,6 @@ class UserSeeder extends Seeder
                 'initials' => 'A1',
                 'email' => 'a1@example.com',
                 'feed_id' => '0Z7eRKM9rCcrima9ic2qqvNFjDjgf87fG',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Alan',
@@ -56,7 +55,6 @@ class UserSeeder extends Seeder
                 'initials' => 'A2',
                 'email' => 'a2@example.com',
                 'feed_id' => '0Xt9612cBl2Qyflho7aO2Pa8bzHzcTugT',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Paul',
@@ -64,7 +62,6 @@ class UserSeeder extends Seeder
                 'initials' => 'P1',
                 'email' => 'p1@example.com',
                 'feed_id' => '0zoYne4G1uMCxWlYtmoWVa21oQETsRENa',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Damien',
@@ -72,7 +69,6 @@ class UserSeeder extends Seeder
                 'initials' => 'D',
                 'email' => 'd@example.com',
                 'feed_id' => '0Sqp9zyH3ZOfaWhPi4KeUd2GNfqTW43aG',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Jedi',
@@ -80,7 +76,6 @@ class UserSeeder extends Seeder
                 'initials' => 'J1',
                 'email' => 'j1@example.com',
                 'feed_id' => '0u6Lf1qaMcGnAshKof1AKJu3N9fpFPbxK',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Stephane',
@@ -88,7 +83,6 @@ class UserSeeder extends Seeder
                 'initials' => 'S1',
                 'email' => 's1@example.com',
                 'feed_id' => '0DqDbA7W8aYtYeog1KuYxWzxsGY9RDPOk',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Jose',
@@ -96,7 +90,6 @@ class UserSeeder extends Seeder
                 'initials' => 'J2',
                 'email' => 'j2@example.com',
                 'feed_id' => '0nBdBHPY5ecq1R3DcavOBylPkcE9FzcdY',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Patrick',
@@ -104,7 +97,6 @@ class UserSeeder extends Seeder
                 'initials' => 'P2',
                 'email' => 'p2@example.com',
                 'feed_id' => '0exLUaY494ItFWhB9GGqgFH7xIUaBJ0AX',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Sebastian',
@@ -112,7 +104,6 @@ class UserSeeder extends Seeder
                 'initials' => 'S2',
                 'email' => 's2@example.com',
                 'feed_id' => '0J6GDsRMyPHggJiQZgIMkJ5VqoCNCtu6o',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Colin',
@@ -120,7 +111,6 @@ class UserSeeder extends Seeder
                 'initials' => 'C1',
                 'email' => 'c1@example.com',
                 'feed_id' => '0RKUQmnYcUhGflhlrrsm9jthBJo2WjNOq',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Gerald',
@@ -128,7 +118,6 @@ class UserSeeder extends Seeder
                 'initials' => 'G1',
                 'email' => 'g1@example.com',
                 'feed_id' => '0RIzKreNFXTbzMKu27phCpZYiRCumqgtR',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Stefanie',
@@ -136,7 +125,6 @@ class UserSeeder extends Seeder
                 'initials' => 'S3',
                 'email' => 's3@example.com',
                 'feed_id' => '0smxuLcDXXlQkR6Uzu2HcDvp7MmW7TCLc',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Ryan',
@@ -144,7 +132,6 @@ class UserSeeder extends Seeder
                 'initials' => 'R',
                 'email' => 'r@example.com',
                 'feed_id' => '0XhukSgCEf8qqVlWui3vd1AgC4uqsXWMr',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Gilles',
@@ -152,7 +139,6 @@ class UserSeeder extends Seeder
                 'initials' => 'G2',
                 'email' => 'g2@example.com',
                 'feed_id' => '0hAiGNOqiCJBrO00pihgqCgi21DnzEays',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Calina',
@@ -160,7 +146,6 @@ class UserSeeder extends Seeder
                 'initials' => 'C2',
                 'email' => 'c2@example.com',
                 'feed_id' => '0D3D3Gdn4JqV4hEkp4TRiRoc02Hk5frJa',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Franco',
@@ -168,7 +153,6 @@ class UserSeeder extends Seeder
                 'initials' => 'F',
                 'email' => 'f@example.com',
                 'feed_id' => '0Ejvlgbq6FODAqqQ2q1ANSdvMGeUczp59',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Yael',
@@ -176,7 +160,6 @@ class UserSeeder extends Seeder
                 'initials' => 'Y',
                 'email' => '@example.com',
                 'feed_id' => '06nzc733u3mGUkCqNKM2PZMsqvFmSWQxs',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'PH',
@@ -184,7 +167,6 @@ class UserSeeder extends Seeder
                 'initials' => 'PH',
                 'email' => 'ph@example.com',
                 'feed_id' => '0taTqoVWbU53AiJipF0HY1tREDdRN5iuQ',
-                'role' => 'pilot'
             ],
             (object) [
                 'first_name' => 'Piere',
@@ -192,7 +174,6 @@ class UserSeeder extends Seeder
                 'initials' => 'P3',
                 'email' => 'p3@example.com',
                 'feed_id' => '09jZgRjaqWGSO5q9g7z6MYCE9myY3Fl3T',
-                'role' => 'pilot'
             ]
         ];
 
@@ -207,7 +188,9 @@ class UserSeeder extends Seeder
                 'line_color' => $this->rand_color()
             ]);
 
-            $user->assignRole($userData->role);
+            if(isset($userData->role)){
+                $user->assignRole($userData->role);
+            }
 
             $messenger = Messenger::create([
                 'user_id' => $user->id,

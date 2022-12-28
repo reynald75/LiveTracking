@@ -26,18 +26,19 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/profile', 'UserController@show')->name('profile');
 
     Route::get('/organization/create', 'OrganizationController@create')->middleware('siteAdmin');
-    Route::get('/pilots/create', 'UserController@create')->middleware('orgAdmin');
+    Route::get('/pilots/create/{org_id}', 'UserController@create')->middleware('orgAdmin');
 
     //API routes called from web forms needing web middleware group
     Route::prefix('api')->group(function(){
         Route::post('/organization', 'OrganizationController@store')->middleware('siteAdmin');
         Route::prefix('pilot')->group(function(){
-            Route::post('/', 'AuthController@createUser')->middleware('orgAdmin');
-            Route::delete('/{id}', 'UserController@destroy')->name('pilot.destroy')/*->middleware('orgAdmin')*/;
-            Route::get('/edit/{id}', 'UserController@edit');
+            Route::get('/delete/{id}', 'UserController@confirmDestroy')->name('pilot.confirm_destroy')->middleware('orgAdmin');
+            Route::get('/edit/{id}', 'UserController@edit')->name('pilot.edit');
+            Route::delete('/{id}', 'UserController@destroy')->name('pilot.destroy')->middleware('orgAdmin');
+            Route::patch('/{id}', 'UserController@update')->name('pilot.update');
+            Route::post('/', 'UserController@store')->middleware('orgAdmin')->name('pilot.register');
         });
     });
 
 });
-
-Route::get('/', 'MapController@index');
+Route::get('/', 'MapController@index')->name('map');
